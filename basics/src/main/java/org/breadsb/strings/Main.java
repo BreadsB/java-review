@@ -4,12 +4,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(greeting("Mike"));
-        System.out.println(greeting("Thomas"));
-        greeting2();
-        greeting3();
-        joinStrings("Beauti", "ful");
-        System.out.println(scanUserInput());
+        BeerSong beerSong = new BeerSong();
+        beerSong.singSong(99);
     }
 
     private static String greeting(String name) {
@@ -48,4 +44,6 @@ public class Main {
 
         return first.concat(second);
     }
+
+
 }
