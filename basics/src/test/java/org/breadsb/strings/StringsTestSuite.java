@@ -10,8 +10,8 @@ public class StringsTestSuite {
 
         String result1 = TwoFer.twoFer("John");
         Assertions.assertEquals("One for John, one for me", result1);
-        int result = 25 % 5;
-        System.out.println(result);
+        int resultTwoFer = 25 % 5;
+        System.out.println(resultTwoFer);
     }
 
     @Test
@@ -28,5 +28,12 @@ public class StringsTestSuite {
     void singBeerSong() {
         BeerSong beerSong = new BeerSong();
         beerSong.singSong(99);
+    }
+
+    @Test
+    void testIsogram() {
+        Isogram isogram = new Isogram();
+        boolean isogramResult = isogram.check("isograms");
+        Assertions.assertFalse(isogramResult);
     }
 }

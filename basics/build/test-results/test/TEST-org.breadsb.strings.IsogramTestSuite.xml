@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.breadsb.strings.IsogramTestSuite" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-19T19:59:56" hostname="DESKTOP-GEDT7EE" time="0.018">
-  <properties/>
-  <testcase name="testIsogram()" classname="org.breadsb.strings.IsogramTestSuite" time="0.018"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
