@@ -1,6 +1,7 @@
 package org.breadsb.strings;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class PigLatinTestSuite {
@@ -28,12 +29,12 @@ public class PigLatinTestSuite {
         String input3 = "Deniro";
 
         //WHEN
-        String result1 = pigLatin.rule2("dedair");
-        String result2 = pigLatin.rule2("chair");
-        String result3 = pigLatin.rule2("Deniro");
+        String result1 = pigLatin.rule2(input1);
+        String result2 = pigLatin.rule2(input2);
+        String result3 = pigLatin.rule2(input3);
 
         //THEN
-        Assertions.assertEquals("airdeday", result1);
+        Assertions.assertEquals("edairday", result1);
         Assertions.assertEquals("airchay", result2);
         Assertions.assertEquals("eniroday", result3);
 
@@ -49,5 +50,21 @@ public class PigLatinTestSuite {
 
         //THEN
         Assertions.assertEquals("aresquay", result);
+    }
+
+    @Test
+    @DisplayName("Testing the fourth rule of PigLatin")
+    public void testFourthRule() {
+        //GIVEN
+        String input1 = "rhythm";
+        String input2 = "my";
+
+        //WHEN
+        String result1 = pigLatin.rule4(input1);
+        String result2 = pigLatin.rule4(input2);
+
+        //THEN
+        Assertions.assertEquals("ythmrhay", result1);
+        Assertions.assertEquals("ymay", result2);
     }
 }

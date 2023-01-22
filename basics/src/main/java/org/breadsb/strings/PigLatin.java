@@ -8,15 +8,16 @@ import java.util.stream.Collectors;
 public class PigLatin {
 
     static final char[] VOWELS = {'a', 'e', 'i', 'o', 'u'};
-    static final String[] CONSONANTS = {"b", "c", "d", "f", "g", "j", "k", "l", "m", "n", "p", "q", "s", "t", "v", "x", "z", "h", "r", "w", "y", "bl", "br", "ch", "ck", "cl"};
+    static final String[] CONSONANTS = {"b", "c", "d", "f", "g", "j", "k", "l", "m", "n",
+                                        "p", "q", "s", "t", "v", "x", "z", "h", "r", "w",
+                                        "y", "bl", "br", "ch", "ck", "cl", "rh"};
     static final String BABY_AY = "ay";
 
     public String rule1(String word) {
         StringBuilder result = new StringBuilder(word);
         for (char vowel : VOWELS) {
             if (word.startsWith(String.valueOf(vowel))) {
-                result.subSequence(0,1);
-
+                result.append(BABY_AY);
             }
         }
         return result.toString().toLowerCase();
@@ -51,9 +52,23 @@ public class PigLatin {
             int temporarylength = consonant.length();
 
             if (word.startsWith(consonant)) {
-                newWord = word.substring(temporarylength) + word.subSequence(0, temporarylength) + "ay";
+                newWord = word.substring(temporarylength) + word.subSequence(0, temporarylength) + BABY_AY;
             }
         }
         return newWord;
+    }
+
+    public String rule4(String word) {
+
+        word = word.toLowerCase();
+        String result = "";
+
+        for (String consonant : CONSONANTS) {
+            if (word.length() == 2 && (word.charAt(1)=='y') || word.startsWith(consonant+"y")) {
+                result = word.substring(consonant.length()) + word.substring(0,consonant.length()) + BABY_AY;
+                break;
+            }
+        }
+        return result;
     }
 }
