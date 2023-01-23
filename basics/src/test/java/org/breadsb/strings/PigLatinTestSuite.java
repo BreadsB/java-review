@@ -1,8 +1,9 @@
 package org.breadsb.strings;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PigLatinTestSuite {
 
@@ -17,7 +18,7 @@ public class PigLatinTestSuite {
         String result = pigLatin.rule1(input);
 
         //THEN
-        Assertions.assertEquals("atticay", result);
+        assertEquals("atticay", result);
     }
 
     @Test
@@ -34,9 +35,9 @@ public class PigLatinTestSuite {
         String result3 = pigLatin.rule2(input3);
 
         //THEN
-        Assertions.assertEquals("edairday", result1);
-        Assertions.assertEquals("airchay", result2);
-        Assertions.assertEquals("eniroday", result3);
+        assertEquals("edairday", result1);
+        assertEquals("airchay", result2);
+        assertEquals("eniroday", result3);
 
     }
 
@@ -49,7 +50,7 @@ public class PigLatinTestSuite {
         String result = pigLatin.rule3(input1);
 
         //THEN
-        Assertions.assertEquals("aresquay", result);
+        assertEquals("aresquay", result);
     }
 
     @Test
@@ -64,7 +65,22 @@ public class PigLatinTestSuite {
         String result2 = pigLatin.rule4(input2);
 
         //THEN
-        Assertions.assertEquals("ythmrhay", result1);
-        Assertions.assertEquals("ymay", result2);
+        assertEquals("ythmrhay", result1);
+        assertEquals("ymay", result2);
+    }
+
+    @Test
+    void testCheckVowels() {
+        //GIVEN
+        String givenVar = "a";
+        String givenVar2 = "b";
+
+        //WHEN
+        boolean resultVar = pigLatin.checkVowels(givenVar);
+        boolean resultVar2 = pigLatin.checkVowels(givenVar2);
+
+        //THEN
+        assertTrue(resultVar);
+        assertFalse(resultVar2);
     }
 }
