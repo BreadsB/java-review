@@ -2,6 +2,8 @@ package org.breadsb.strings;
 
 import java.util.*;
 
+// https://exercism.org/tracks/java/exercises/word-count
+
 public class WordCount {
 
     static final String[] SYMBOLS = {":",",","\\.","\"","!","\n","'\\B","\\B'"};
