@@ -47,18 +47,40 @@ public class RemoveRepeatedCharacters {
         return sb.toString();
     }
 
+    public static String unrepeatedFifthMethod(String s) {
+        //THE FASTEST WAY
+
+        String result = "";
+        boolean repeated;
+        for(int i=0; i<s.length();i++) {
+            repeated = false;
+            for(int j=0; j<i; j++) {
+                if (s.charAt(j)==s.charAt(i)) {
+                    repeated = true;
+                    break;
+                }
+            }
+            if(repeated) {
+                continue;
+            } else {
+                result = result.concat(String.valueOf(s.charAt(i)));
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         time1 = System.nanoTime();
         System.out.print(unrepeatedFirstMethod(EXAMPLE3));
         time2 = System.nanoTime();
         differ = time2 - time1;
-        System.out.println(" - Time for Split: " + differ + "ns");
+        System.out.println("1. - Time for Split: " + differ + "ns");
 
         time1 = System.nanoTime();
         System.out.print(unrepeatedSecondMethod(EXAMPLE3));
         time2 = System.nanoTime();
         differ = time2 - time1;
-        System.out.println(" - Time for Split: " + differ + "ns");
+        System.out.println("2. - Time for Split: " + differ + "ns");
 
         time1 = System.nanoTime();
         System.out.print("3. " + unrepeatedThirdMethod(EXAMPLE3));
@@ -68,6 +90,12 @@ public class RemoveRepeatedCharacters {
 
         time1 = System.nanoTime();
         System.out.print("4. " + unrepeatedFourthMethod(EXAMPLE3));
+        time2 = System.nanoTime();
+        differ = time2 - time1;
+        System.out.println(" - Time for Split: " + differ + "ns");
+
+        time1 = System.nanoTime();
+        System.out.print("5. " + unrepeatedFifthMethod(EXAMPLE3));
         time2 = System.nanoTime();
         differ = time2 - time1;
         System.out.println(" - Time for Split: " + differ + "ns");
