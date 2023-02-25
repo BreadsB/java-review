@@ -1,9 +1,7 @@
 package org.breadsb.strings;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.StringJoiner;
-import java.util.stream.Collectors;
 
 public class StringFundamentals {
 
@@ -24,9 +22,9 @@ public class StringFundamentals {
     public static void examples() {
         String s = "asdqwrqwtwetwetqwet";
         List<Character> c = s.chars().mapToObj(o->(char)o).toList();
-        List<String> str = s.chars().mapToObj(String.class::cast).toList();
+//        List<String> str = s.chars().mapToObj(String.class::cast).toList();
         System.out.println("1: " + c);
-        System.out.println("1str: " + str);
+//        System.out.println("1str: " + str);
         s.chars().mapToObj(o->(char)o).forEach(System.out::print);
 //        System.out.println(String.join("", c));
         char[] chars = s.toCharArray();
@@ -35,7 +33,7 @@ public class StringFundamentals {
         System.out.println("\ncharsJoined2: " + charsJoined2);
         System.out.println("\ncharsJoined3: " + charsJoined3);
         System.out.println(String.valueOf(chars));
-        System.out.println(String.valueOf(c));
-        System.out.println(chars.toString());
+        System.out.println(c);
+        System.out.println(Arrays.toString(chars));
     }
 }
