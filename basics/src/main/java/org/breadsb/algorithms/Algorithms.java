@@ -59,13 +59,4 @@ public class Algorithms {
             return result;
         }
     }
-
-    class RearrangeTheSentence {
-//        https://edabit.com/challenge/FPemghc8ut9xfaMGo
-
-        public static String rearrange(String s) {
-            return "Done";
-        }
-    }
-
 }
