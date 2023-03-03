@@ -40,7 +40,7 @@ public class PalindromicAnagram {
     public static boolean isPalindromePossible3(String str) {
         int k=0;
         for (String i : str.split("")) {
-            k += str.replace(i, "").length() == str.length()-1?1:0;
+            k += (str.replace(i, "").length() == str.length()-1) ? 1 : 0;
         }
         return k<=1;
     }

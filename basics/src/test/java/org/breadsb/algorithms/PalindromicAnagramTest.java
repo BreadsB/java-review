@@ -14,29 +14,34 @@ class PalindromicAnagramTest {
 
         //WHEN
         boolean result = isPalindromePossible(s);
-        System.out.println(result);
+        boolean result2 = isPalindromePossible3(s);
 
         //THEN
         assertFalse(result);
+        assertFalse(result2);
     }
 
     @Test
     void testTwo() {
         assertTrue(isPalindromePossible("suhbeusheff"));
+        assertTrue(isPalindromePossible3("suhbeusheff"));
     }
 
     @Test
     void testThree() {
         assertTrue(isPalindromePossible("noon"));
+        assertTrue(isPalindromePossible3("noon"));
     }
 
     @Test
     void testFour() {
         assertFalse(isPalindromePossible("zgzqxljjp"));
+        assertFalse(isPalindromePossible3("zgzqxljjp"));
     }
 
     @Test
     void testFive() {
         assertFalse(isPalindromePossible("tgmqkpdhnhatoco"));
+        assertFalse(isPalindromePossible3("tgmqkpdhnhatoco"));
     }
 }
