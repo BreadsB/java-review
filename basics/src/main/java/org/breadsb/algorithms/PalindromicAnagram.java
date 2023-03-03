@@ -2,6 +2,8 @@ package org.breadsb.algorithms;
 
 //https://edabit.com/challenge/a242aPZGmmx8xhiuy
 
+import java.util.Arrays;
+
 public class PalindromicAnagram {
 
     public static boolean isPalindromePossible(String str) {
@@ -28,32 +30,18 @@ public class PalindromicAnagram {
         return result;
     }
 
-    public static boolean isPalindromePossible2(String s) {
-        boolean result = false;
-        if (s.length()%2!=0) {
-            char[] a = s.toCharArray();
-            boolean[] b = new boolean[a.length];
+    public static boolean isPalindromePossible2(String str) {
+        char[] strChars = str.toCharArray();
+        Arrays.sort(strChars);
+        str = new String(strChars).replaceAll("([a-z])\\1","");
+        return str.length() <=1;
+    }
 
-            int i = 0;
-
-            for (char element : a) {
-                b[i] = (s.chars().filter(n -> n == element).count())%2==0;
-                i++;
-            }
-
-            int y = 0;
-            int z = 0;
-            for (boolean element : b) {
-                if (element) {
-                    y++;
-                } else {
-                    z++;
-                }
-            }
-            if (z==1 || y%2==0) {
-                result = true;
-            }
+    public static boolean isPalindromePossible3(String str) {
+        int k=0;
+        for (String i : str.split("")) {
+            k += str.replace(i, "").length() == str.length()-1?1:0;
         }
-        return result;
+        return k<=1;
     }
 }

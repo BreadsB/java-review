@@ -32,11 +32,11 @@ class PalindromicAnagramTest {
 
     @Test
     void testFour() {
-        assertTrue(isPalindromePossible("zgzqxljjp"));
+        assertFalse(isPalindromePossible("zgzqxljjp"));
     }
 
     @Test
     void testFive() {
-        assertTrue(isPalindromePossible("tgmqkpdhnhatoco"));
+        assertFalse(isPalindromePossible("tgmqkpdhnhatoco"));
     }
 }
