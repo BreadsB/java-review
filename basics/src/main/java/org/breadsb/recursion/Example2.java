@@ -16,6 +16,6 @@ public class Example2 {
     }
 
     public static int countVowels2(String str) {
-        return str.replaceAll("^aeiou","").length();
+        return str.replaceAll("[^aeiou]","").length();
     }
 }

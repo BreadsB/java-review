@@ -53,4 +53,16 @@ class Example2Test {
         int expectedResult = 3;
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    void test5() {
+        //GIVEN
+        String testInput = "baabab";
+        //WHEN
+        int actualResult = Example2.countVowels2(testInput);
+
+        //THEN
+        int expectedResult = 3;
+        assertEquals(expectedResult, actualResult);
+    }
 }
