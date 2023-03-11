@@ -1,6 +1,6 @@
 package org.breadsb.strings;
 
-import org.junit.jupiter.api.Test;
+import org.breadsb.edabit.strings.PigLatin;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 

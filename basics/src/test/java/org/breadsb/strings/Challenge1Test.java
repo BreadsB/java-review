@@ -1,5 +1,6 @@
 package org.breadsb.strings;
 
+import org.breadsb.edabit.strings.Challenge1;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

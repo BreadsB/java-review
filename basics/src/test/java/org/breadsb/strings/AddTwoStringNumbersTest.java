@@ -2,7 +2,7 @@ package org.breadsb.strings;
 
 import org.junit.jupiter.api.*;
 
-import static org.breadsb.strings.AddTwoStringNumbers.*;
+import static org.breadsb.edabit.strings.AddTwoStringNumbers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

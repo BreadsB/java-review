@@ -1,6 +1,9 @@
 package org.breadsb.strings;
 
-import org.junit.jupiter.api.Assertions;
+import org.breadsb.edabit.strings.BeerSong;
+import org.breadsb.edabit.strings.Isogram;
+import org.breadsb.edabit.strings.Raindrops;
+import org.breadsb.edabit.strings.TwoFer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

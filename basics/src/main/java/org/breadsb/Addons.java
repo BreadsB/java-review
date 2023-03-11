@@ -33,5 +33,12 @@ public class Addons {
         }
     }
 
+    static class Strings {
 
+        static void convertStringToByteArray(String s) {
+            byte[] bArr = s.getBytes();
+            System.out.println(bArr);
+            System.out.println(Arrays.toString(bArr));
+        }
+    }
 }

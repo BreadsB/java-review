@@ -1,6 +1,6 @@
 package org.breadsb.strings;
 
-import org.junit.jupiter.api.DisplayName;
+import org.breadsb.edabit.strings.PigLatin;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

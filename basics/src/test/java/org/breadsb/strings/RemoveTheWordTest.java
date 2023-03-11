@@ -2,7 +2,7 @@ package org.breadsb.strings;
 
 import org.junit.jupiter.api.Test;
 
-import static org.breadsb.strings.RemoveTheWord.*;
+import static org.breadsb.edabit.strings.RemoveTheWord.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RemoveTheWordTest {

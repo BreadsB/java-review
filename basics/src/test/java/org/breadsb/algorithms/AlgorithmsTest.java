@@ -2,7 +2,7 @@ package org.breadsb.algorithms;
 
 import org.junit.jupiter.api.Test;
 
-import static org.breadsb.algorithms.Algorithms.FindTheDifference.*;
+import static org.breadsb.edabit.algorithms.Algorithms.FindTheDifference.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AlgorithmsTest {

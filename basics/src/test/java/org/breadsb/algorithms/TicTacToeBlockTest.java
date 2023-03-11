@@ -1,5 +1,6 @@
 package org.breadsb.algorithms;
 
+import org.breadsb.edabit.algorithms.TicTacToeBlock;
 import org.junit.jupiter.api.Test;
 
 public class TicTacToeBlockTest {

@@ -1,5 +1,6 @@
 package org.breadsb.strings;
 
+import org.breadsb.edabit.strings.LongestAlternatingSubstring;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

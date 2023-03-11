@@ -1,5 +1,6 @@
 package org.breadsb.ifconditionals;
 
+import org.breadsb.edabit.ifconditionals.BlackJack;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;

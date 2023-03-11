@@ -3,7 +3,7 @@ package org.breadsb.recursion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.breadsb.recursion.ArraySum.*;
+import static org.breadsb.edabit.recursion.ArraySum.*;
 
 public class ArraySumTest {
 

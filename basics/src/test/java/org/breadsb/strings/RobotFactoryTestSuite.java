@@ -1,5 +1,7 @@
 package org.breadsb.strings;
 
+import org.breadsb.edabit.strings.Robot;
+import org.breadsb.edabit.strings.RobotFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

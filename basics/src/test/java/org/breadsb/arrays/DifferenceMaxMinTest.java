@@ -1,5 +1,6 @@
 package org.breadsb.arrays;
 
+import org.breadsb.edabit.arrays.DifferenceMaxMin;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

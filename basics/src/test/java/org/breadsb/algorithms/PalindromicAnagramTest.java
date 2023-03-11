@@ -2,7 +2,7 @@ package org.breadsb.algorithms;
 
 import org.junit.jupiter.api.Test;
 
-import static org.breadsb.algorithms.PalindromicAnagram.*;
+import static org.breadsb.edabit.algorithms.PalindromicAnagram.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PalindromicAnagramTest {

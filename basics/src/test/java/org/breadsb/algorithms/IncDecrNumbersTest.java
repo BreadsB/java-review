@@ -1,9 +1,8 @@
 package org.breadsb.algorithms;
 
+import org.breadsb.edabit.algorithms.IncDecrNumbers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.breadsb.algorithms.IncDecrNumbers.*;
 
 public class IncDecrNumbersTest {
 

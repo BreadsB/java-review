@@ -1,5 +1,6 @@
 package org.breadsb.recursion;
 
+import org.breadsb.edabit.recursion.Example2;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
