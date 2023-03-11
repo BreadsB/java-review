@@ -40,5 +40,13 @@ public class Addons {
             System.out.println(bArr);
             System.out.println(Arrays.toString(bArr));
         }
+
+        static void usingNewFunctions() {
+            String s = "aaaaa";
+            s.getBytes(); // What for is getBytes, where can i use it?
+            s.intern(); // What is intern for?
+//            s.getChars();
+        }
+
     }
 }
