@@ -49,4 +49,33 @@ public class Addons {
         }
 
     }
+
+    static class Numbers {
+        static void getFirstDigitFromInt(int a) {
+
+        }
+
+        static void getFristDigitFromLong(int a) {
+
+        }
+
+        static void reduceLengthOfInt(int a) {
+
+        }
+
+        static int[] arrayFromInt(int a) {
+            int[] arr = String.valueOf(a).chars().map(n->Character.getNumericValue(n)).toArray();
+            return arr;
+        }
+
+        static StringBuilder stringBuilderFromInt(int a) {
+            StringBuilder b = new StringBuilder().append(a);
+            return b;
+        }
+
+        static void makeHelper() {
+//            Create private method named as helper
+//            If you want to pass from long to String
+        }
+    }
 }
