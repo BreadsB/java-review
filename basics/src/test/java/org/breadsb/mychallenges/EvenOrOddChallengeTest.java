@@ -19,4 +19,10 @@ class EvenOrOddChallengeTest {
         String s = "5";
         assertFalse(approach2(s));
     }
+
+    @Test
+    void test1() {
+        int i = 9;
+        System.out.println(i&1);
+    }
 }
