@@ -12,43 +12,7 @@ import java.util.regex.Pattern;
 
 public class PostfixNotation {
 
-    public static int postfix(String expr) {
-        String[] s = expr.split("\\s");
-        Pattern patternNumber = Pattern.compile("\\d+");
-        Pattern patternOperand = Pattern.compile("\\W");
-        List<Integer> integerList = new ArrayList<>();
-        char[] operand = new char[1];
-
-        for (String element : s) {
-            if (patternNumber.matcher(element).matches()) {
-                integerList.add(Integer.parseInt(element));
-                continue;
-            }
-            if (patternOperand.matcher(element).matches()) {
-                operand[0] = element.charAt(0);
-            }
-        }
-
-        if (integerList.size()>1) {
-            return helper(integerList.get(0), integerList.get(1), operand[0]);
-        } else if (integerList.size()==1) {
-            return integerList.get(0);
-        }
-        return 0;
-    }
-
-    private static int helper(int a, int b, char operand) {
-        //    Try, catch, finally
-        return switch (operand) {
-            case '+' -> a+b;
-            case '-' -> a-b;
-            case '*' -> a*b;
-            case '/' -> a/b;
-            default -> throw new IllegalStateException("Unexpected value: " + operand);
-        };
-    }
-
-    public static int postfix2(String s) {
+    public static int postfix(String s) {
         String[] splited = s.split("\\s");
         Pattern patternNumber = Pattern.compile("\\d+");
         Pattern patternOperand = Pattern.compile("\\W");

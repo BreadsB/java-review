@@ -77,5 +77,12 @@ public class Addons {
 //            Create private method named as helper
 //            If you want to pass from long to String
         }
+
+        static void signum() {
+            int signum1 = Long.signum(2525L);
+            int signum2 = Long.signum(0L);
+            int signum3 = Long.signum(-500L);
+            System.out.println("This is example of using signum: " + signum1 + ", " + signum2 + ", " + signum3);
+        }
     }
 }

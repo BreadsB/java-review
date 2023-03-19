@@ -19,4 +19,9 @@ public class AddonsTest {
     void test2() {
         System.out.println(Arrays.toString(Addons.Numbers.arrayFromInt(1350)));
     }
+
+    @Test
+    void testSignum() {
+        Addons.Numbers.signum();
+    }
 }
