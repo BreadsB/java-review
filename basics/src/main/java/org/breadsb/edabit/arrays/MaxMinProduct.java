@@ -24,6 +24,18 @@ public class MaxMinProduct {
     }
 
     public static int minProduct(int[] arr) {
-        return 0;
+        arr = Arrays.stream(arr).sorted().toArray();
+
+        int one = arr[0]*arr[1];
+        int two = arr[0]*arr[arr.length-1];
+        if (one < two) {
+            return one*arr[2];
+        } else {
+            if (two < 0) {
+                return two*arr[arr.length-2];
+            } else {
+                return two*arr[1];
+            }
+        }
     }
 }

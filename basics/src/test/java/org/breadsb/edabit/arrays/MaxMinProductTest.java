@@ -25,6 +25,9 @@ public class MaxMinProductTest {
 
     @Test
     void testMinProduct() {
-
+        assertEquals(-1, minProduct(new int[] {1,-1, 1}));
+        assertEquals(-1, minProduct(new int[] {1,-1, 1, 1}));
+        assertEquals(-126, minProduct(new int[] {-8,-9, 1, 2, 7}));
+        assertEquals(-504, minProduct(new int[] {-8, 1, 2, 7, 9}));
     }
 }
