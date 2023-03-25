@@ -8,6 +8,12 @@ class NumberOfBitsTest {
 //              https://www.rapidtables.com/convert/number/decimal-to-binary.html
 //              https://www.techtarget.com/whatis/definition/bitwise
 
+//    Decimal = 75
+//    Binary = 1001011
+//    Hexadecimal = 4B (use conversion table) (reminders from end to beginning)
+//    Octal = 113 (Reminders from dividing by 8, from end to beginning)
+
+
     @Test
     void test0() {
         int result = NumberOfBits.hammingWeight(Integer.parseInt("100000000010"));
