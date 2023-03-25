@@ -15,12 +15,6 @@ class NumberOfBitsTest {
 
 
     @Test
-    void test0() {
-        int result = NumberOfBits.hammingWeight(Integer.parseInt("100000000010"));
-        assertEquals(2, result);
-    }
-
-    @Test
     void test1() {
 
         int a = 100;

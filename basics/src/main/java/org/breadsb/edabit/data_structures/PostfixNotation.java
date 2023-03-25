@@ -8,6 +8,7 @@ package org.breadsb.edabit.data_structures;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 import java.util.regex.Pattern;
 
 public class PostfixNotation {
@@ -59,5 +60,32 @@ public class PostfixNotation {
             case '/' -> a / b;
             default -> 0;
         };
+    }
+
+    public static int postfix2(String expr) {
+        String[] s = expr.split("\\s+");
+        Stack<Integer> stack = new Stack<>();
+
+        for (String element : s) {
+
+            if(element.matches("\\d+")) {
+                stack.push(Integer.valueOf(element));
+            } else {
+                if(stack.size()<2) {
+                    return 0;
+                }
+
+                int val1 = stack.pop();
+                int val2 = stack.pop();
+
+                switch (element) {
+                    case "+" -> stack.push(val2 + val1);
+                    case "-" -> stack.push(val2 - val1);
+                    case "*" -> stack.push(val2 * val1);
+                    case "/" -> stack.push(val2 / val1);
+                }
+            }
+        }
+        return stack.pop();
     }
 }
