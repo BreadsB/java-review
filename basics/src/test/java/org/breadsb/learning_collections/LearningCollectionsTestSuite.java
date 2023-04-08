@@ -13,4 +13,17 @@ public class LearningCollectionsTestSuite {
         System.out.println(generator.generate());
         System.out.println(highEndGenerator.generate());
     }
+
+    @Test
+    void testWattageAbstractClass() {
+        WattageAbstract wattageAbstract = new WattageAbstract();
+        WattageAbstract.CordlessScrewdriver cordlessScrewdriver = wattageAbstract.new CordlessScrewdriver(50);
+        System.out.println("Actual battery life: " + cordlessScrewdriver.getBatteryStatus());
+        cordlessScrewdriver.use();
+        System.out.println("Actual battery life: " + cordlessScrewdriver.getBatteryStatus());
+        cordlessScrewdriver.use();
+        System.out.println("Actual battery life: " + cordlessScrewdriver.getBatteryStatus());
+        cordlessScrewdriver.loadBattery();
+        System.out.println("Actual battery life: " + cordlessScrewdriver.getBatteryStatus());
+    }
 }
