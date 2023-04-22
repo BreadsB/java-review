@@ -2,12 +2,14 @@ package org.breadsb.learning_collections;
 
 import com.sun.net.httpserver.Filter;
 
-public class Chains {
+import java.io.Serializable;
 
-    String attribute1;
-    String attribute2;
-    int attribute3;
-    boolean attribute4;
+public class Chains implements Serializable {
+
+    private String attribute1;
+    private String attribute2;
+    private int attribute3;
+    transient private boolean attribute4;
 
     public Chains(String inputAttribute1,
                   String inputAttribute2,
@@ -34,10 +36,10 @@ public class Chains {
                 '}';
     }
 
-    public static void main(String[] args) {
-        Chains chains = new Chains();
-        System.out.println(chains);
-        Chains chains2 = new Chains("Sample1", "Sample2", 1, true);
-        System.out.println(chains2);
-    }
+//    public static void main(String[] args) {
+//        Chains chains = new Chains();
+//        System.out.println(chains);
+//        Chains chains2 = new Chains("Sample1", "Sample2", 1, true);
+//        System.out.println(chains2);
+//    }
 }
