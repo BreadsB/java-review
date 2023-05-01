@@ -38,4 +38,24 @@ public class StringSandbox {
 
         return s;
     }
+
+    String classString;
+
+    public void checkingStringPool() {
+
+        String localString = "hello";
+
+        System.out.println(classString); // not initialized manually classString, will be automatically initialized as null
+        System.out.println(localString); // localString must be initialized manually, otherwise will return error
+    }
+
+    public void creatingStringObjects() {
+
+        String localString1 = "hello";
+        String localString2 = "hello";
+        String localString3 = new String("hello");
+
+        System.out.println();
+    }
+
 }
