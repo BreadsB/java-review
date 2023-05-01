@@ -3,9 +3,9 @@ package org.breadsb.sandbox;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Objects;
+import java.util.*;
+
+import static java.util.Arrays.asList;
 
 class StringSandboxTest {
 
@@ -68,5 +68,19 @@ class StringSandboxTest {
         Calendar c2 = new GregorianCalendar(2020, 1, 14);
         String s6 = String.format("Date of birth: %1$te %1$tB %2$tY", c1, c2);
         Assertions.assertEquals("Date of birth: 7 czerwca 2020", s6);
+    }
+
+    @Test
+    void testingStringTokenizer() {
+        StringSandbox ssbox = new StringSandbox();
+        String s1 = "Remember token?";
+        String s2 = "I,remember,this,token";
+
+        List<String> result1 = new ArrayList<>(asList("Remember token?"));
+        List<String> result2 = new ArrayList<>(asList("I","remember","this","token"));
+
+        Assertions.assertEquals(result1, ssbox.getTokens(s1, ","));
+        Assertions.assertTrue(result1.equals(ssbox.getTokens(s1, ",")));
+        Assertions.assertEquals(result2, ssbox.getTokens(s2, ","));
     }
 }

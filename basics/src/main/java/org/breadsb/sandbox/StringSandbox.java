@@ -2,6 +2,9 @@ package org.breadsb.sandbox;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -49,13 +52,13 @@ public class StringSandbox {
         System.out.println(localString); // localString must be initialized manually, otherwise will return error
     }
 
-    public void creatingStringObjects() {
+    public List<String> getTokens(String str, String delim) {
 
-        String localString1 = "hello";
-        String localString2 = "hello";
-        String localString3 = new String("hello");
-
-        System.out.println();
+        List<String> tokens = new ArrayList<>();
+        StringTokenizer st = new StringTokenizer(str, delim);
+        while (st.hasMoreElements()) {
+            tokens.add(st.nextToken());
+        }
+        return tokens;
     }
-
 }
