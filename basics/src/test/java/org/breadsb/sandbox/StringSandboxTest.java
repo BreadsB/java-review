@@ -64,8 +64,9 @@ class StringSandboxTest {
         String s5 = String.format("Hello%10s", "world");
         Assertions.assertEquals("Hello     world", s5);
 
-        Calendar c = new GregorianCalendar(2022, 5, 7);
-        String s6 = String.format("Date of birth: %1$te %1$tB %tY", c);
-        Assertions.assertEquals("Date of birth: 7 czerwca 2022", s6);
+        Calendar c1 = new GregorianCalendar(2022, 5, 7);
+        Calendar c2 = new GregorianCalendar(2020, 1, 14);
+        String s6 = String.format("Date of birth: %1$te %1$tB %2$tY", c1, c2);
+        Assertions.assertEquals("Date of birth: 7 czerwca 2020", s6);
     }
 }
