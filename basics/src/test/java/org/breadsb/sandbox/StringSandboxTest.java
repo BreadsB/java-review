@@ -89,9 +89,19 @@ class StringSandboxTest {
         String one = "Hello";
         String two = "World";
 
-        String result = StringSandbox.joinTwoStringsUsingJoiner(one, two);
+        String result = StringSandbox.joinTwoStringsUsingJoiner(one, two, StringSandbox.Delimiter.MINUS);
 
         Assertions.assertEquals("Joiner: [Hello-World]", result);
+    }
+
+    @Test
+    void testSecondJoiner() {
+        String s1 = "Good";
+        String s2 = "Morning";
+
+        String result = StringSandbox.secondJoiner(s1, s2, StringSandbox.Delimiter.MINUS);
+
+        Assertions.assertEquals("Joiner: [Good-Morning]", result);
     }
 
     @Test

@@ -11,7 +11,22 @@ import java.util.stream.IntStream;
 
 public class StringSandbox {
 
+    private static Delimiter delimiter;
+    public enum Delimiter {
+        MINUS("-"),
+        COMMA(","),
+        DOT(".");
 
+        private final String value;
+
+        Delimiter(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return this.value;
+        }
+    }
 
     static String decoding(String input, String encoding) {
 
@@ -65,20 +80,26 @@ public class StringSandbox {
         return tokens;
     }
 
-    static public String joinTwoStringsUsingJoiner(String s1, String s2) {
+    static public String joinTwoStringsUsingJoiner(String s1, String s2, Delimiter delim) {
 
-        StringJoiner joiner = new StringJoiner("-", "Joiner: [", "]");
+        String prefix = "Joiner: [";
+        String suffix = "]";
+        StringJoiner joiner = switch (delim) {
+            case MINUS -> new StringJoiner("-", prefix, suffix);
+            case COMMA -> new StringJoiner(",", prefix, suffix);
+            case DOT -> new StringJoiner(".", prefix, suffix);
+        };
+
         joiner.add(s1).add(s2);
-        joiner.setEmptyValue("empty");
-
         return joiner.toString();
     }
 
-    static public String joinerMinus(String s1, String s2) {
-        return "a";
-    }
+    static public String secondJoiner(String s1, String s2, Delimiter delim) {
+        String prefix = "Joiner: [";
+        String suffix = "]";
+        StringJoiner joiner = new StringJoiner(delim.getValue(), prefix, suffix);
+        joiner.add(s1).add(s2);
 
-    static public String joinerComa(String s1, String s2) {
-        return "b";
+        return joiner.toString();
     }
 }
