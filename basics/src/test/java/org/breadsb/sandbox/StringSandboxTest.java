@@ -37,8 +37,8 @@ class StringSandboxTest {
         Assertions.assertTrue(s1.equals(s3));
         Assertions.assertTrue(Objects.equals(s1, s2));
         Assertions.assertTrue(Objects.equals(s1, s3));
-        Assertions.assertTrue(Objects.equals(null, s3));
 
+        Assertions.assertFalse(Objects.equals(null, s3));
         Assertions.assertFalse(s1 == s3);
 
         Assertions.assertSame(s1, s2);
@@ -82,5 +82,37 @@ class StringSandboxTest {
         Assertions.assertEquals(result1, ssbox.getTokens(s1, ","));
         Assertions.assertTrue(result1.equals(ssbox.getTokens(s1, ",")));
         Assertions.assertEquals(result2, ssbox.getTokens(s2, ","));
+    }
+
+    @Test
+    void testingStringJoiner() {
+        String one = "Hello";
+        String two = "World";
+
+        String result = StringSandbox.joinTwoStringsUsingJoiner(one, two);
+
+        Assertions.assertEquals("Joiner: [Hello-World]", result);
+    }
+
+    @Test
+    void testEmptyJoiner() {
+        StringJoiner sj = new StringJoiner(",");
+        sj.setEmptyValue("Empty");
+
+        Assertions.assertEquals("Empty", sj.toString());
+    }
+
+    @Test
+    void mergingTwoStringJoiners() {
+        StringJoiner joiner1 = new StringJoiner(",");
+        joiner1.setEmptyValue("Empty");
+
+        StringJoiner joiner2 = new StringJoiner("-");
+        joiner2.add("Big").add("Ben");
+
+        joiner2.merge(joiner1);
+
+        Assertions.assertEquals("Big-Ben", joiner2.toString());
+        Assertions.assertEquals("Empty", joiner1.toString());
     }
 }

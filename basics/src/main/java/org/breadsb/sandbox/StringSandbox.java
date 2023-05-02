@@ -4,11 +4,14 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class StringSandbox {
+
+
 
     static String decoding(String input, String encoding) {
 
@@ -60,5 +63,22 @@ public class StringSandbox {
             tokens.add(st.nextToken());
         }
         return tokens;
+    }
+
+    static public String joinTwoStringsUsingJoiner(String s1, String s2) {
+
+        StringJoiner joiner = new StringJoiner("-", "Joiner: [", "]");
+        joiner.add(s1).add(s2);
+        joiner.setEmptyValue("empty");
+
+        return joiner.toString();
+    }
+
+    static public String joinerMinus(String s1, String s2) {
+        return "a";
+    }
+
+    static public String joinerComa(String s1, String s2) {
+        return "b";
     }
 }
