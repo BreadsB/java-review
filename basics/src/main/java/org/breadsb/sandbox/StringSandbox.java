@@ -102,4 +102,13 @@ public class StringSandbox {
 
         return joiner.toString();
     }
+
+    static public void intAsHexBinary(int num) {
+
+        String hexadecimal = Integer.toHexString(num);
+        String binary = Integer.toBinaryString(num);
+        String hex = String.format("0x%08X", num);
+
+        System.out.println("{\nint/Decimal: " + num + "\nHexadecimal: " + hexadecimal.toUpperCase() + "\nBinary: " + binary + "\nHex2: " + hex + "\n}");
+    }
 }

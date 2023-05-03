@@ -125,4 +125,10 @@ class StringSandboxTest {
         Assertions.assertEquals("Big-Ben", joiner2.toString());
         Assertions.assertEquals("Empty", joiner1.toString());
     }
+
+    @Test
+    void testIfStringIsNumeric() {
+        int a = 170;
+        StringSandbox.intAsHexBinary(a);
+    }
 }
