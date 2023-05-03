@@ -3,6 +3,9 @@ package org.breadsb.sandbox;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static java.util.Arrays.asList;
@@ -131,4 +134,5 @@ class StringSandboxTest {
         int a = 170;
         StringSandbox.intAsHexBinary(a);
     }
+
 }
