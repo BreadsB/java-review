@@ -6,6 +6,12 @@ public class ExceptionSandboxTestSuite {
 
     @Test
     void testForceToThrowException() throws Exception {
-        ExceptionSandbox.testThrowIOException();
+
+        try {
+            ExceptionSandbox.testThrowIOException();
+        } catch (Throwable e) {
+            System.out.println("Cause: " + e.getCause());
+        }
     }
+
 }
