@@ -9,7 +9,7 @@ public class IOSandboxTestSuite {
 
     IOSandbox ioSandbox = new IOSandbox();
 
-    // How to virtually create a file?
+    // How to virtually create a file? Use Mockito to only simulate a created file.
 
     @Test
     void testCreateNewFile() {
