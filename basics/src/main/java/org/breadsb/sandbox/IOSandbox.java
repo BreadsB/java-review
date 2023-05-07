@@ -21,6 +21,7 @@ public class IOSandbox {
             System.out.println("Process finished.");
             return true;
         } catch (IOException | BlankNameException e) {
+            System.out.println("Catched an Exception: " + e.getCause() + "\nException message: \"" + e.getMessage() + "\"");
             return false;
         }
     }

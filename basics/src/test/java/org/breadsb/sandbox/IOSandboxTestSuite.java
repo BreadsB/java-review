@@ -23,9 +23,11 @@ public class IOSandboxTestSuite {
     @Test
     void testForceExceptionOnCreatingNewFile() {
         String fileName = " ";
-        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, ()-> {
-            ioSandbox.createNewTextFile(fileName);
-        }, "Name not blank expected");
+        boolean result = ioSandbox.createNewTextFile(fileName);
+        Assertions.assertFalse(result);
+//        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, ()-> {
+//            ioSandbox.createNewTextFile(fileName);
+//        }, "Name not blank expected");
     }
 
     @Test
