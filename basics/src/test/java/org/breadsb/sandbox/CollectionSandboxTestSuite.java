@@ -1,6 +1,6 @@
 package org.breadsb.sandbox;
 
-import org.junit.jupiter.api.Assertions;
+import org.breadsb.sandbox.exceptions.StreamNotExistException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,13 +40,14 @@ public class CollectionSandboxTestSuite {
     }
 
     @Test
-    void testStreamIsNotReuseable() {
-        LongStream longStream = LongStream.of(1L, 2L, 8L);
-        System.out.println(longStream.max());
-        try {
-            System.out.println(longStream.min());
-        } catch (IllegalStateException e) {
-            System.out.println("LongStream has been shutdown already! \nCause: " + e.getLocalizedMessage());
-        }
+    void testStreamIsNotReusable() {
+        assertThrows(StreamNotExistException.class, () -> {
+           CollectionSandbox.streamIsNotReusable();
+        });
+    }
+
+    @Test
+    void testCollectingAndThen() {
+
     }
 }

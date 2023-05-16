@@ -2,7 +2,8 @@ package org.breadsb.sandbox.exceptions;
 
 public class StreamNotExistException extends IllegalStateException {
 
-    StreamNotExistException(String message) {
-        super(message);
+    public StreamNotExistException(String message, Exception e) {
+        super(message, e);
+        System.out.println("Exception caught: " + e.getLocalizedMessage());
     }
 }
