@@ -1,6 +1,7 @@
 package org.breadsb.sandbox;
 
 import org.breadsb.sandbox.exceptions.StreamNotExistException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -44,6 +45,13 @@ public class CollectionSandboxTestSuite {
         assertThrows(StreamNotExistException.class, () -> {
            CollectionSandbox.streamIsNotReusable();
         });
+    }
+
+    @Test
+    void testReuseStreamUsingSupplier() {
+        Collection<Integer> intStream = IntStream.of(7, 29).boxed().collect(Collectors.toList());
+        List<Integer> expected = new ArrayList<Integer>(intStream);
+        assertEquals(expected, CollectionSandbox.reuseStreamUsingSupplier());
     }
 
     @Test
