@@ -4,11 +4,10 @@ import org.breadsb.sandbox.exceptions.StreamNotExistException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,6 +55,8 @@ public class CollectionSandboxTestSuite {
 
     @Test
     void testCollectingAndThen() {
-
+        List<Integer> expected = new ArrayList<>(Arrays.asList(5, 9, 11));
+        List<Integer> list = CollectionSandbox.creatingUnmodifiableList();
+        assertEquals(expected, list);
     }
 }
