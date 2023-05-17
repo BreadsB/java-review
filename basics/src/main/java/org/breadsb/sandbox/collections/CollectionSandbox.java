@@ -43,4 +43,10 @@ public class CollectionSandbox {
             return list;
         }
     }
+
+    protected static List<Enemy> sortingEnemiesByLevel(List<Enemy> enemyList) {
+        EnemyLevelComparator elc = new EnemyLevelComparator();
+        Collections.sort(enemyList, elc);
+        return enemyList;
+    }
 }

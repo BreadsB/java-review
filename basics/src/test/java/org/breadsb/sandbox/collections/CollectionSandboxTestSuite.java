@@ -67,4 +67,28 @@ public class CollectionSandboxTestSuite {
 
         assertEquals(-1, user1.compareTo(user2));
     }
+
+    @Test
+    void testEnemiesComparator() {
+        Enemy boss = new Enemy("Boss", 100);
+        Enemy viceBoss = new Enemy("Vice-Boss", 90);
+        Enemy knight = new Enemy("Knight", 50);
+        Enemy peasant = new Enemy("Peasant", 1);
+
+        List<Enemy> enemies = new ArrayList<>();
+        enemies.add(knight);
+        enemies.add(boss);
+        enemies.add(peasant);
+        enemies.add(viceBoss);
+
+        List<Enemy> expected = new ArrayList<>();
+        expected.add(peasant);
+        expected.add(knight);
+        expected.add(viceBoss);
+        expected.add(boss);
+
+        CollectionSandbox.sortingEnemiesByLevel(enemies);
+
+        assertEquals(expected, enemies);
+    }
 }
