@@ -1,4 +1,4 @@
-package org.breadsb.sandbox;
+package org.breadsb.sandbox.collections;
 
 import org.breadsb.sandbox.exceptions.StreamNotExistException;
 

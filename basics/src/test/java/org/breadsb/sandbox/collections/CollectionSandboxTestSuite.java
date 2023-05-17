@@ -1,13 +1,13 @@
-package org.breadsb.sandbox;
+package org.breadsb.sandbox.collections;
 
+import org.breadsb.sandbox.collections.CollectionSandbox;
+import org.breadsb.sandbox.collections.User;
 import org.breadsb.sandbox.exceptions.StreamNotExistException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,5 +58,13 @@ public class CollectionSandboxTestSuite {
         List<Integer> expected = new ArrayList<>(Arrays.asList(5, 9, 11));
         List<Integer> list = CollectionSandbox.creatingUnmodifiableList();
         assertEquals(expected, list);
+    }
+
+    @Test
+    void testCompareUsers() {
+        User user1 = new User("James", "Cameron", 47.3);
+        User user2 = new User("Ron", "Highway", 17.8, 352.14);
+
+        assertEquals(-1, user1.compareTo(user2));
     }
 }
