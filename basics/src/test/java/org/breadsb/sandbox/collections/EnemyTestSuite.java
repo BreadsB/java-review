@@ -1,5 +1,6 @@
 package org.breadsb.sandbox.collections;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,20 +11,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EnemyTestSuite {
 
-    @Test
-    @DisplayName("Test sorting enemies by level using ")
-    void sortEnemiesByLevelUsingComparator() {
-        //GIVEN
-        Enemy boss = new Enemy("Boss", 100, 400);
-        Enemy viceBoss = new Enemy("Vice-Boss", 90, 325);
-        Enemy knight = new Enemy("Knight", 50, 100);
-        Enemy peasant = new Enemy("Peasant", 1, 0);
+    Enemy boss, viceBoss, knight, peasant;
+    List<Enemy> enemies;
 
-        List<Enemy> enemies = new ArrayList<>(4);
+    @BeforeEach
+    void setUp() {
+        boss = new Enemy("Boss", 100, 400);
+        viceBoss = new Enemy("Vice-Boss", 90, 325);
+        knight = new Enemy("Knight", 50, 100);
+        peasant = new Enemy("Peasant", 1, 0);
+
+        enemies = new ArrayList<>(4);
         enemies.add(knight);
         enemies.add(boss);
         enemies.add(peasant);
         enemies.add(viceBoss);
+    }
+
+    @Test
+    @DisplayName("Test sorting enemies by level using ")
+    void sortEnemiesByLevelUsingComparator() {
 
         List<Enemy> expected = new ArrayList<>(4);
         expected.add(peasant);
@@ -41,18 +48,6 @@ public class EnemyTestSuite {
     @Test
     @DisplayName("Test sorting enemies by reward using default method compareTo and Comparable interface")
     void sortingEnemiesByRewardUsingComparable() {
-
-        //GIVEN
-        Enemy boss = new Enemy("Boss", 100, 400);
-        Enemy viceBoss = new Enemy("Vice-Boss", 90, 325);
-        Enemy knight = new Enemy("Knight", 50, 100);
-        Enemy peasant = new Enemy("Peasant", 1, 0);
-
-        List<Enemy> enemies = new ArrayList<>(4);
-        enemies.add(knight);
-        enemies.add(boss);
-        enemies.add(peasant);
-        enemies.add(viceBoss);
 
         List<Enemy> expected = new ArrayList<>(4);
         expected.add(peasant);
