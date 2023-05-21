@@ -13,6 +13,11 @@ import java.util.stream.Stream;
 
 public class CollectionSandbox {
 
+    enum ENEMY_SORTING {
+        LEVEL,
+        REWARD
+    }
+
     public static final void streamIsNotReusable() {
         try {
             LongStream ls = LongStream.of(1L, 2L, 3L);
@@ -44,9 +49,18 @@ public class CollectionSandbox {
         }
     }
 
-    protected static List<Enemy> sortingEnemiesByLevel(List<Enemy> enemyList) {
-        EnemyLevelComparator elc = new EnemyLevelComparator();
-        Collections.sort(enemyList, elc);
-        return enemyList;
+    protected static List<Enemy> sortingEnemy (List<Enemy> enemyList, ENEMY_SORTING sortType) {
+        switch (sortType) {
+            case LEVEL:
+                EnemyLevelComparator elc = new EnemyLevelComparator();
+                Collections.sort(enemyList, elc);
+                return enemyList;
+            case REWARD:
+                Collections.sort(enemyList);
+                return enemyList;
+            default:
+                System.out.println("Not sorted!");
+                return enemyList;
+        }
     }
 }
