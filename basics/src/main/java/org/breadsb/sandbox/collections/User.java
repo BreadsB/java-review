@@ -38,6 +38,14 @@ public class User implements Comparable<User> {
         return this.rank;
     }
 
+    public void addRank(double rankValue) {
+        if (rankValue>0.0) {
+            this.rank += rankValue;
+        } else {
+//            Throw custom exception
+        }
+    }
+
     @Override
     public int compareTo(User otherUser) {
         return Double.compare(getRank(), otherUser.getRank());
