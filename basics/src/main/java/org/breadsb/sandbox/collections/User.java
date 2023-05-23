@@ -1,5 +1,7 @@
 package org.breadsb.sandbox.collections;
 
+import java.util.Objects;
+
 public class User implements Comparable<User> {
     private String firstName;
     private String secondName;
@@ -39,5 +41,18 @@ public class User implements Comparable<User> {
     @Override
     public int compareTo(User otherUser) {
         return Double.compare(getRank(), otherUser.getRank());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Double.compare(user.age, age) == 0 && Double.compare(user.rank, rank) == 0 && Objects.equals(firstName, user.firstName) && Objects.equals(secondName, user.secondName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, secondName, age, rank);
     }
 }
