@@ -1,9 +1,6 @@
 package org.breadsb.sandbox.collections;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.*;
 
@@ -30,11 +27,8 @@ public class EnemyTestSuite {
         expected.add(enemy1);
         expected.add(enemy3);
 
-//        enemySet = enemySet.stream().sorted().collect(Collectors.toSet());
-//        enemy2, enemy1, enemy3 - reward
-//        enemy1, enemy2, enemy3
-
-        assertEquals(expected, enemySet);
+        Assertions.assertNotEquals(expected.stream().toList(), enemySet.stream().toList());
+        Assertions.assertEquals(expected.stream().toList(), enemySet.stream().sorted().toList());
     }
 
     @Nested
