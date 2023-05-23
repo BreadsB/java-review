@@ -8,27 +8,48 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EnemyTestSuite {
 
-    @Test
-    void sortEnemiesByLevelInSet() {
+    @Nested
+    class innerSortEnemiesSet {
+        Enemy enemy1, enemy2, enemy3;
 
-        Enemy enemy1 = new Enemy("Standard", 17, 500.0);
-        Enemy enemy2 = new Enemy("High", 20, 414.0);
-        Enemy enemy3 = new Enemy("Highest", 30, 714.0);
+        @BeforeEach
+        void setUp() {
+            enemy1 = new Enemy("Standard", 17, 500.0);
+            enemy2 = new Enemy("High", 20, 414.0);
+            enemy3 = new Enemy("Highest", 30, 714.0);
+        }
 
-        EnemyLevelComparator elc = new EnemyLevelComparator();
+        @Test
+        void sortEnemySetByLevel() {
+            EnemyLevelComparator elc = new EnemyLevelComparator();
 
-        Set<Enemy> enemySet = new TreeSet<>(elc);
-        enemySet.add(enemy3);
-        enemySet.add(enemy1);
-        enemySet.add(enemy2);
+            Set<Enemy> enemySet = new TreeSet<>(elc);
+            enemySet.add(enemy3);
+            enemySet.add(enemy1);
+            enemySet.add(enemy2);
 
-        Set<Enemy> expected = new TreeSet<>();
-        expected.add(enemy2);
-        expected.add(enemy1);
-        expected.add(enemy3);
+            Set<Enemy> expected = new TreeSet<>();
+            expected.add(enemy2);
+            expected.add(enemy1);
+            expected.add(enemy3);
 
-        Assertions.assertNotEquals(expected.stream().toList(), enemySet.stream().toList());
-        Assertions.assertEquals(expected.stream().toList(), enemySet.stream().sorted().toList());
+            Assertions.assertNotEquals(expected.stream().toList(), enemySet.stream().toList());
+        }
+
+        @Test
+        void sortEnemySetByReward() {
+            Set<Enemy> enemySet = new TreeSet<>();
+            enemySet.add(enemy3);
+            enemySet.add(enemy1);
+            enemySet.add(enemy2);
+
+            Set<Enemy> expected = new TreeSet<>();
+            expected.add(enemy2);
+            expected.add(enemy1);
+            expected.add(enemy3);
+
+            Assertions.assertEquals(expected.stream().toList(), enemySet.stream().toList());
+        }
     }
 
     @Nested
