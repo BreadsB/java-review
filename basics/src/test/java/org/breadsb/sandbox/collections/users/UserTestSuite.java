@@ -14,6 +14,12 @@ public class UserTestSuite {
     @Nested
     class InnerTests {
         User user1, user2;
+        public static Map<UserKey, User> userMap;
+
+        static {
+            userMap = new HashMap<>();
+            userMap.put(new UserKey(new byte[] {4,5,6}), new User("testFirstName", "testSecondName", 27.5));
+        }
 
         @BeforeEach
         void setup() {
@@ -36,6 +42,10 @@ public class UserTestSuite {
             String actual = "Ronald";
             String expected = userMap.get(key1).getFirstName();
             Assertions.assertEquals(expected, actual);
+        }
+
+        @Test
+        void testMethodsOfInitializingHashMaps() {
         }
     }
 
