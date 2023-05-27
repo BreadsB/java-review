@@ -1,11 +1,11 @@
-package org.breadsb.sandbox.collections;
+package org.breadsb.sandbox.collections.users;
 
+import org.breadsb.sandbox.collections.users.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class UserTestSuite {
 

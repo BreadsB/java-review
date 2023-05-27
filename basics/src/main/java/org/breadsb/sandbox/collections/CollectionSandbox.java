@@ -51,16 +51,19 @@ public class CollectionSandbox {
 
     protected static List<Enemy> sortingEnemy (List<Enemy> enemyList, ENEMY_SORTING sortType) {
         switch (sortType) {
-            case LEVEL:
+            case LEVEL -> {
                 EnemyLevelComparator elc = new EnemyLevelComparator();
                 Collections.sort(enemyList, elc);
                 return enemyList;
-            case REWARD:
+            }
+            case REWARD -> {
                 Collections.sort(enemyList);
                 return enemyList;
-            default:
+            }
+            default -> {
                 System.out.println("Not sorted!");
                 return enemyList;
+            }
         }
     }
 }
