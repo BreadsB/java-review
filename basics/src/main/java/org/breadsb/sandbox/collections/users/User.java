@@ -1,4 +1,4 @@
-package org.breadsb.sandbox.collections;
+package org.breadsb.sandbox.collections.users;
 
 import java.util.Objects;
 
