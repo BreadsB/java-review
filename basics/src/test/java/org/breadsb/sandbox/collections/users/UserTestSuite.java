@@ -47,6 +47,11 @@ public class UserTestSuite {
         @Test
         void testMethodsOfInitializingHashMaps() {
         }
+
+        @Test
+        void createSingletonImmutableMap() {
+
+        }
     }
 
     @Test
