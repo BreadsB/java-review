@@ -2,12 +2,42 @@ package org.breadsb.sandbox.collections.users;
 
 import org.breadsb.sandbox.collections.users.User;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserTestSuite {
+
+    @Nested
+    class InnerTests {
+        User user1, user2;
+
+        @BeforeEach
+        void setup() {
+            user1 = new User("Adam", "Eden", 27);
+            user2 = new User("Ronald", "Grim", 30);
+        }
+
+        @Test
+        void checkUserKeyEquality() {
+            //GIVEN
+            byte[] keyArray = new byte[] {1,2,3,4,5};
+            UserKey key1 = new UserKey(keyArray);
+            UserKey key2 = new UserKey(new byte[] {1,2,3,4,5});
+
+            Map<UserKey, User> userMap = new HashMap<>();
+            //WHEN
+            userMap.put(key1, user1);
+            userMap.put(key2, user2);
+            //THEN
+            String actual = "Ronald";
+            String expected = userMap.get(key1).getFirstName();
+            Assertions.assertEquals(expected, actual);
+        }
+    }
 
     @Test
     void testIfTwoUserObjectsAreEqual() {
