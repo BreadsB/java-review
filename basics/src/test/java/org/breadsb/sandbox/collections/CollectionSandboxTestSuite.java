@@ -1,7 +1,6 @@
 package org.breadsb.sandbox.collections;
 
-import org.breadsb.sandbox.collections.CollectionSandbox;
-import org.breadsb.sandbox.collections.User;
+import org.breadsb.sandbox.collections.users.User;
 import org.breadsb.sandbox.exceptions.StreamNotExistException;
 import org.junit.jupiter.api.Test;
 
