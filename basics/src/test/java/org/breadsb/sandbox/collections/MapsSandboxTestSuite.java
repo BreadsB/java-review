@@ -47,7 +47,7 @@ public class MapsSandboxTestSuite {
                 new AbstractMap.SimpleImmutableEntry<Integer, String>(2, "James"),
                 new AbstractMap.SimpleImmutableEntry<Integer, String>(3, "Ronald")
         );
-
+        //THEN
         Assertions.assertEquals(3, map.size());
         Assertions.assertEquals("James", map.get(2));
     }
@@ -62,5 +62,20 @@ public class MapsSandboxTestSuite {
         Assertions.assertFalse(singletonMap.isEmpty());
         Assertions.assertTrue(singletonMap.containsValue("singleton value"));
         Assertions.assertEquals(3, multipleEntriesMap.size());
+    }
+
+    @Test
+    void tryToExpandMapCreatedByFactoryMethod() {
+        //GIVEN WHEN
+        Map<Integer, String> map = Map.ofEntries(
+                new AbstractMap.SimpleImmutableEntry<Integer, String>(1, "Mike"),
+                new AbstractMap.SimpleImmutableEntry<Integer, String>(2, "James"),
+                new AbstractMap.SimpleImmutableEntry<Integer, String>(3, "Ronald")
+        );
+
+        //THEN
+        Assertions.assertThrows(UnsupportedOperationException.class, ()-> {
+            map.put(4, "error");
+        });
     }
 }
