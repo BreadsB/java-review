@@ -3,6 +3,7 @@ package org.breadsb.sandbox.collections;
 import org.junit.jupiter.api.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -109,6 +110,25 @@ public class EnemyTestSuite {
 
             //THEN
             assertEquals(expected, enemies);
+        }
+
+        @Test
+        void sortEnemiesSet() {
+
+            Set<Enemy> enemySet = new HashSet<>();
+            enemySet.add(boss);
+            enemySet.add(peasant);
+            enemySet.add(knight);
+            enemySet.add(viceBoss);
+
+            List<Enemy> enemyList = new ArrayList<>(enemySet);
+            Collections.sort(enemyList);
+
+            Set<Enemy> sortedEnemySet = new HashSet<>();
+//            Set<Enemy> sortedEnemySet = new HashSet<>(enemyList);
+            sortedEnemySet = enemyList.stream().collect(Collectors.toSet());
+
+            Assertions.assertEquals(enemySet, sortedEnemySet);
         }
     }
 }
