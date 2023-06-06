@@ -1,8 +1,5 @@
 package org.breadsb.sandbox.collections;
 
-import java.util.Collections;
-import java.util.Comparator;
-
 public class Enemy implements Comparable<Enemy> {
 
     private String name;

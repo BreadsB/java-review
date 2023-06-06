@@ -1,69 +1,134 @@
 package org.breadsb.sandbox.collections;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EnemyTestSuite {
 
-    @Test
-    @DisplayName("Test sorting enemies by level using ")
-    void sortEnemiesByLevelUsingComparator() {
-        //GIVEN
-        Enemy boss = new Enemy("Boss", 100, 400);
-        Enemy viceBoss = new Enemy("Vice-Boss", 90, 325);
-        Enemy knight = new Enemy("Knight", 50, 100);
-        Enemy peasant = new Enemy("Peasant", 1, 0);
+    @Nested
+    class innerSortEnemiesSet {
+        Enemy enemy1, enemy2, enemy3;
 
-        List<Enemy> enemies = new ArrayList<>(4);
-        enemies.add(knight);
-        enemies.add(boss);
-        enemies.add(peasant);
-        enemies.add(viceBoss);
+        @BeforeEach
+        void setUp() {
+            enemy1 = new Enemy("Standard", 17, 500.0);
+            enemy2 = new Enemy("High", 20, 414.0);
+            enemy3 = new Enemy("Highest", 30, 714.0);
+        }
 
-        List<Enemy> expected = new ArrayList<>(4);
-        expected.add(peasant);
-        expected.add(knight);
-        expected.add(viceBoss);
-        expected.add(boss);
+        @Test
+        void sortEnemySetByLevel() {
+            EnemyLevelComparator elc = new EnemyLevelComparator();
 
-        //WHEN
-        CollectionSandbox.sortingEnemy(enemies, CollectionSandbox.ENEMY_SORTING.LEVEL);
+            Set<Enemy> enemySet = new TreeSet<>(elc);
+            enemySet.add(enemy3);
+            enemySet.add(enemy1);
+            enemySet.add(enemy2);
 
-        //THEN
-        assertEquals(expected, enemies);
+            Set<Enemy> expected = new TreeSet<>();
+            expected.add(enemy2);
+            expected.add(enemy1);
+            expected.add(enemy3);
+
+            Assertions.assertNotEquals(expected.stream().toList(), enemySet.stream().toList());
+        }
+
+        @Test
+        void sortEnemySetByReward() {
+            Set<Enemy> enemySet = new TreeSet<>();
+            enemySet.add(enemy3);
+            enemySet.add(enemy1);
+            enemySet.add(enemy2);
+
+            Set<Enemy> expected = new TreeSet<>();
+            expected.add(enemy2);
+            expected.add(enemy1);
+            expected.add(enemy3);
+
+            Assertions.assertEquals(expected.stream().toList(), enemySet.stream().toList());
+        }
     }
 
-    @Test
-    @DisplayName("Test sorting enemies by reward using default method compareTo and Comparable interface")
-    void sortingEnemiesByRewardUsingComparable() {
+    @Nested
+    class innerEnemySortingTests {
+        Enemy boss, viceBoss, knight, peasant;
+        List<Enemy> enemies;
 
-        //GIVEN
-        Enemy boss = new Enemy("Boss", 100, 400);
-        Enemy viceBoss = new Enemy("Vice-Boss", 90, 325);
-        Enemy knight = new Enemy("Knight", 50, 100);
-        Enemy peasant = new Enemy("Peasant", 1, 0);
+        @BeforeEach
+        void setUp() {
+            boss = new Enemy("Boss", 100, 400);
+            viceBoss = new Enemy("Vice-Boss", 90, 325);
+            knight = new Enemy("Knight", 50, 100);
+            peasant = new Enemy("Peasant", 1, 0);
+        }
 
-        List<Enemy> enemies = new ArrayList<>(4);
-        enemies.add(knight);
-        enemies.add(boss);
-        enemies.add(peasant);
-        enemies.add(viceBoss);
+        @Test
+        @DisplayName("Test sorting enemies by level using ")
+        void sortEnemiesByLevelUsingComparator() {
 
-        List<Enemy> expected = new ArrayList<>(4);
-        expected.add(peasant);
-        expected.add(knight);
-        expected.add(viceBoss);
-        expected.add(boss);
+            enemies = new ArrayList<>(4);
+            enemies.add(knight);
+            enemies.add(boss);
+            enemies.add(peasant);
+            enemies.add(viceBoss);
 
-        //WHEN
-        CollectionSandbox.sortingEnemy(enemies, CollectionSandbox.ENEMY_SORTING.REWARD);
+            List<Enemy> expected = new ArrayList<>(4);
+            expected.add(peasant);
+            expected.add(knight);
+            expected.add(viceBoss);
+            expected.add(boss);
 
-        //THEN
-        assertEquals(expected, enemies);
+            //WHEN
+            CollectionSandbox.sortingEnemy(enemies, CollectionSandbox.ENEMY_SORTING.LEVEL);
+
+            //THEN
+            assertEquals(expected, enemies);
+        }
+
+        @Test
+        @DisplayName("Test sorting enemies by reward using default method compareTo and Comparable interface")
+        void sortingEnemiesByRewardUsingComparable() {
+
+            enemies = new ArrayList<>(4);
+            enemies.add(knight);
+            enemies.add(boss);
+            enemies.add(peasant);
+            enemies.add(viceBoss);
+
+            List<Enemy> expected = new ArrayList<>(4);
+            expected.add(peasant);
+            expected.add(knight);
+            expected.add(viceBoss);
+            expected.add(boss);
+
+            //WHEN
+            CollectionSandbox.sortingEnemy(enemies, CollectionSandbox.ENEMY_SORTING.REWARD);
+
+            //THEN
+            assertEquals(expected, enemies);
+        }
+
+        @Test
+        void sortEnemiesSet() {
+
+            Set<Enemy> enemySet = new HashSet<>();
+            enemySet.add(boss);
+            enemySet.add(peasant);
+            enemySet.add(knight);
+            enemySet.add(viceBoss);
+
+            List<Enemy> enemyList = new ArrayList<>(enemySet);
+            Collections.sort(enemyList);
+
+            Set<Enemy> sortedEnemySet = new HashSet<>();
+//            Set<Enemy> sortedEnemySet = new HashSet<>(enemyList);
+            sortedEnemySet = enemyList.stream().collect(Collectors.toSet());
+
+            Assertions.assertEquals(enemySet, sortedEnemySet);
+        }
     }
 }
