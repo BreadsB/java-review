@@ -2,13 +2,8 @@ package org.breadsb.sandbox.streams;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.LongStream;
-import java.util.stream.Stream;
+import java.util.*;
+import java.util.stream.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -62,5 +57,33 @@ public class CustomerTestSuite {
         LongStream longStream = LongStream.rangeClosed(1,5);
         List<Long> list = longStream.boxed().toList();
         assertEquals(5, list.size());
+    }
+
+    @Test
+    void createListFromDoubleStreamAndRandom() {
+        Random random = new Random();
+        DoubleStream ds = random.doubles(5);
+        List<Double> dl = ds.boxed().toList();
+        assertEquals(5, dl.size());
+    }
+
+    @Test
+    void createListFromStringStream() {
+        IntStream stream = "abc".chars();
+        Stream<Character> stream1 = "abcd".codePoints().mapToObj(c -> (char) c);
+    }
+
+    @Test
+    void testSkipMethodInStream() {
+        Stream<String> stream = Stream.of("aaa", "bbb", "ccc").skip(1);
+        List<String> list = stream.toList();
+        assertEquals("bbb", list.get(0));
+        assertEquals("ccc", list.get(1));
+        assertThrows(ArrayIndexOutOfBoundsException.class, ()-> list.get(2));
+    }
+
+    @Test
+    void testOrderOfStreamExecution() {
+
     }
 }
