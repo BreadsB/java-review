@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,5 +55,12 @@ public class CustomerTestSuite {
         List<Integer> list = streamInteger.toList();
         assertEquals(5, list.size());
         assertEquals(13, list.get(1));
+    }
+
+    @Test
+    void createListFromLongStream() {
+        LongStream longStream = LongStream.rangeClosed(1,5);
+        List<Long> list = longStream.boxed().toList();
+        assertEquals(5, list.size());
     }
 }
