@@ -32,4 +32,13 @@ public class IOSandbox {
             throw new BlankNameException("file name is blank!");
         }
     }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.nextLine();
+        int age = scanner.nextInt();
+        double height = scanner.nextDouble();
+
+        System.out.println("User name: " + name + ", age: " + age + ", height: " + height + "cm");
+    }
 }
