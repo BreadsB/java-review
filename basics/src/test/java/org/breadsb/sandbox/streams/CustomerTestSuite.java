@@ -1,6 +1,8 @@
 package org.breadsb.sandbox.streams;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -98,5 +100,42 @@ public class CustomerTestSuite {
         List<String> expectedList2 = Arrays.asList("BC2", "BC3");
         Assertions.assertEquals(expectedList1, resultList1);
         Assertions.assertEquals(expectedList2, resultList2);
+    }
+
+    @Nested
+    class CustomerStreamTests {
+        Customer customer1, customer2, customer3, customer4, customer5, customer6;
+        List<Customer> customerList;
+        @BeforeEach
+        void setup() {
+            customer1 = new Customer(1, "Brown", 100);
+            customer2 = new Customer(2, "Mike", 18);
+            customer3 = new Customer(3, "Theo", 400);
+            customer4 = new Customer(4, "Robert", 55);
+            customer5 = new Customer(4, "David", 55);
+            customer6 = new Customer(4, "Mike", 900);
+            customerList = Arrays.asList(customer1, customer2, customer3, customer4, customer5, customer6);
+        }
+
+        @Test
+        void filterCustomers() {
+            List<Customer> filteredList = customerList.stream()
+                    .filter(customer -> customer.getName().length()<=4)
+                    .collect(Collectors.toList());
+
+            Assertions.assertEquals(3, filteredList.size());
+        }
+
+        @Test
+        void modifyCustomersListUsingStream() {
+            List<Customer> modifiedList = customerList.stream()
+                    .map(customer -> {
+                        customer.setName(customer.getName().toUpperCase());
+                        return customer;
+                    })
+                    .collect(Collectors.toList());
+
+            Assertions.assertEquals("BROWN", modifiedList.get(0).getName());
+        }
     }
 }
