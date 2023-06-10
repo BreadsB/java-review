@@ -124,6 +124,7 @@ public class CustomerTestSuite {
                     .collect(Collectors.toList());
 
             Assertions.assertEquals(3, filteredList.size());
+            Assertions.assertEquals("Mike", filteredList.get(0).getName());
         }
 
         @Test
@@ -133,6 +134,15 @@ public class CustomerTestSuite {
                         customer.setName(customer.getName().toUpperCase());
                         return customer;
                     })
+                    .collect(Collectors.toList());
+
+            Assertions.assertEquals("BROWN", modifiedList.get(0).getName());
+        }
+
+        @Test
+        void modifyCustomerListUsingStreamPeek() {
+            List<Customer> modifiedList = customerList.stream()
+                    .peek(customer -> customer.setName( customer.getName().toUpperCase() ))
                     .collect(Collectors.toList());
 
             Assertions.assertEquals("BROWN", modifiedList.get(0).getName());
