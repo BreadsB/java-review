@@ -1,5 +1,6 @@
 package org.breadsb.sandbox.streams;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -84,6 +85,18 @@ public class CustomerTestSuite {
 
     @Test
     void testOrderOfStreamExecution() {
+//        https://www.baeldung.com/java-8-streams
+        //GIVEN
+        List<String> list = Arrays.asList("abc1", "abc2", "abc3");
 
+        //WHEN
+        List<String> resultList1 = list.stream().skip(2).map(element -> element.toUpperCase()).collect(Collectors.toList());
+        List<String> resultList2 = list.stream().map(element -> element.toUpperCase()).skip(1).map(element -> element.substring(1)).collect(Collectors.toList());
+
+        //THEN
+        List<String> expectedList1 = Arrays.asList("ABC3");
+        List<String> expectedList2 = Arrays.asList("BC2", "BC3");
+        Assertions.assertEquals(expectedList1, resultList1);
+        Assertions.assertEquals(expectedList2, resultList2);
     }
 }
