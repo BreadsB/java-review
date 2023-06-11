@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class IOSandboxTestSuite {
 
@@ -80,5 +81,10 @@ public class IOSandboxTestSuite {
             System.out.println(e.getCause().getMessage());
         }
         System.out.println(result);
+    }
+
+    @Test
+    void writeToAFile() {
+
     }
 }
