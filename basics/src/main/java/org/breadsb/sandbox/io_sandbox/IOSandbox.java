@@ -59,13 +59,18 @@ public class IOSandbox {
     }
 
     public static void main(String[] args) {
+
+    }
+
+    void writeSomethingToAlreadyExistingFile() {
         File file = new File("basics/src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
         System.out.println(file.exists());
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file.getAbsolutePath()));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file.getAbsolutePath(), true));
+            bw.append(' ');
             bw.write(input);
             bw.close();
         } catch (NullPointerException | IOException e) {

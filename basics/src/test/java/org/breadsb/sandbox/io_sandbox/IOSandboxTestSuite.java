@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class IOSandboxTestSuite {
@@ -84,7 +87,35 @@ public class IOSandboxTestSuite {
     }
 
     @Test
-    void writeToAFile() {
+    void moveFileToTestDirectory() {
+//        Mockito for a File
+        Path file = Paths.get("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
+        Path targetFile = Paths.get("src/test/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
+        try {
+            Files.move(file, targetFile);
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 
+    @Test
+    void moveFileToMainDirectory() {
+        Path file = Paths.get("src/test/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
+        Path targetFile = Paths.get("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
+        try {
+            Files.move(file, targetFile);
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    @Test
+    void renameToMethod() {
+        File file = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
+        boolean isMoved = file.renameTo(new File("src/test/java/org/breadsb/sandbox/io_sandbox/IOFile.txt"));
+        Assertions.assertTrue(isMoved);
+        File file2 = new File("src/test/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
+        boolean isMoved2 = file2.renameTo(new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt"));
+        Assertions.assertTrue(isMoved2);
     }
 }
