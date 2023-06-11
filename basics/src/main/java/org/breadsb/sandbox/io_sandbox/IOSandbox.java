@@ -5,6 +5,7 @@ import org.breadsb.sandbox.exceptions.BlankNameException;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.NumberFormat;
 import java.util.Scanner;
 
@@ -85,6 +86,19 @@ public class IOSandbox {
             new File("src/main/java/org/breadsb/sandbox/io_sandbox/FileToDelete.txt").createNewFile();
             File fileToDelete = new File("src/main/java/org/breadsb/sandbox/io_sandbox/FileToDelete.txt");
             isDeleted = fileToDelete.delete();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return isDeleted;
+    }
+
+    boolean deleteFileJDK7() {
+        boolean isDeleted = false;
+        try {
+            Files.createFile(Paths.get("src/main/java/org/breadsb/sandbox/io_sandbox/FileToDelete.txt"));
+            Path deletePath = Path.of("src/main/java/org/breadsb/sandbox/io_sandbox/FileToDelete.txt");
+            Files.delete(deletePath);
+            isDeleted = true;
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }

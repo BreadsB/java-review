@@ -132,4 +132,11 @@ public class IOSandboxTestSuite {
         boolean result = ios.deleteFile();
         Assertions.assertTrue(result);
     }
+
+    @Test
+    void deleteAFileUsingJDK7() {
+        IOSandbox ios = new IOSandbox();
+        boolean result = ios.deleteFileJDK7();
+        Assertions.assertTrue(result);
+    }
 }
