@@ -125,4 +125,11 @@ public class IOSandboxTestSuite {
         boolean isRenamed = file.renameTo(new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile2.txt"));
         Assertions.assertTrue(isRenamed);
     }
+
+    @Test
+    void deleteAFile() {
+        IOSandbox ios = new IOSandbox();
+        boolean result = ios.deleteFile();
+        Assertions.assertTrue(result);
+    }
 }

@@ -78,4 +78,16 @@ public class IOSandbox {
             e.printStackTrace();
         }
     }
+
+    boolean deleteFile() {
+        boolean isDeleted = false;
+        try {
+            new File("src/main/java/org/breadsb/sandbox/io_sandbox/FileToDelete.txt").createNewFile();
+            File fileToDelete = new File("src/main/java/org/breadsb/sandbox/io_sandbox/FileToDelete.txt");
+            isDeleted = fileToDelete.delete();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return isDeleted;
+    }
 }
