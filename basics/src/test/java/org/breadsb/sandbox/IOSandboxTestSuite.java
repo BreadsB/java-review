@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.io.BufferedReader;
-import java.io.Console;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Scanner;
 
 public class IOSandboxTestSuite {
@@ -48,9 +45,23 @@ public class IOSandboxTestSuite {
         Assertions.assertFalse(fileCreated);
     }
 
+    private String readFromFile(InputStream inputstream) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(inputstream));
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+        } catch (IOException | NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
+        return sb.toString();
+    }
+
     @Test
-    void consoleTesting() {
-        Console console = System.console();
-        console.readLine();
+    void checkIfFileExists() {
+        File file = new File("E:\\IntelliJ_Projects\\java-review\\basics\\myFile.txt");
+        Assertions.assertTrue(file.exists());
     }
 }
