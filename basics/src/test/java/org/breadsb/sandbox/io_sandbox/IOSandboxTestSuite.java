@@ -1,11 +1,11 @@
-package org.breadsb.sandbox;
+package org.breadsb.sandbox.io_sandbox;
 
+import org.breadsb.sandbox.io_sandbox.IOSandbox;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.*;
-import java.util.Scanner;
 
 public class IOSandboxTestSuite {
 
@@ -15,7 +15,8 @@ public class IOSandboxTestSuite {
 
     @Test
     void testCreateNewFile() throws IOException {
-        String s = "CreatingNewTxtFileUsingJava";
+        String s = "IOFile";
+        ioSandbox.createNewTextFile(s);
         Mockito.when(mockIOSandbox.createNewTextFile(s)).thenReturn(true);
         boolean created = mockIOSandbox.createNewTextFile(s);
         Assertions.assertTrue(created);
@@ -23,7 +24,7 @@ public class IOSandboxTestSuite {
 
     @Test
     void testForceExceptionOnCreatingNewFile() {
-        String fileName = " ";
+        String fileName = "IOFile";
         boolean result = ioSandbox.createNewTextFile(fileName);
         Assertions.assertFalse(result);
 //        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, ()-> {
@@ -61,7 +62,23 @@ public class IOSandboxTestSuite {
 
     @Test
     void checkIfFileExists() {
-        File file = new File("E:\\IntelliJ_Projects\\java-review\\basics\\myFile.txt");
+        File file = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
         Assertions.assertTrue(file.exists());
+    }
+
+    @Test
+    void readFromAFile() throws IOException {
+        File file = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        StringBuilder result = new StringBuilder();
+        try {
+            String tempTryString;
+            while ((tempTryString = br.readLine()) != null) {
+                result.append(tempTryString).append("\n");
+            }
+        } catch (IOException | NullPointerException e) {
+            System.out.println(e.getCause().getMessage());
+        }
+        System.out.println(result);
     }
 }

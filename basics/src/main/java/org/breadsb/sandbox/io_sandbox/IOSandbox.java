@@ -1,4 +1,4 @@
-package org.breadsb.sandbox;
+package org.breadsb.sandbox.io_sandbox;
 
 import org.breadsb.sandbox.exceptions.BlankNameException;
 
@@ -18,7 +18,7 @@ public class IOSandbox {
         try {
             System.out.println("Starting process of creating a File.");
             checkNameNotBlank(name);
-            Path filePath = Path.of(name + ".txt");
+            Path filePath = Path.of("src/main/java/org/breadsb/sandbox/io_sandbox/"+name + ".txt");
             Files.createFile(filePath);
             System.out.println("Process finished.");
             return true;
