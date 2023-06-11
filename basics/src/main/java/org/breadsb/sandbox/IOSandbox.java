@@ -2,9 +2,12 @@ package org.breadsb.sandbox;
 
 import org.breadsb.sandbox.exceptions.BlankNameException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.NumberFormat;
 import java.util.Scanner;
 
 public class IOSandbox {
@@ -34,11 +37,23 @@ public class IOSandbox {
     }
 
     public static void main(String[] args) {
+    }
+
+    void readUsingScanner() {
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
         int age = scanner.nextInt();
         double height = scanner.nextDouble();
 
         System.out.println("User name: " + name + ", age: " + age + ", height: " + height + "cm");
+    }
+
+    void readInputFromConsoleUsingBuffer() {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            int i = Integer.parseInt(br.readLine());
+        } catch (NumberFormatException | IOException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
     }
 }
