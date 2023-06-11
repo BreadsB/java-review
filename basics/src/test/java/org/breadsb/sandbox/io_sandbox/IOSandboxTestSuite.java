@@ -118,4 +118,11 @@ public class IOSandboxTestSuite {
         boolean isMoved2 = file2.renameTo(new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt"));
         Assertions.assertTrue(isMoved2);
     }
+
+    @Test
+    void renameFile() {
+        File file = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
+        boolean isRenamed = file.renameTo(new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile2.txt"));
+        Assertions.assertTrue(isRenamed);
+    }
 }
