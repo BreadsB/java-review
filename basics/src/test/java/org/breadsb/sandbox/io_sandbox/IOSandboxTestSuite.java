@@ -1,15 +1,14 @@
 package org.breadsb.sandbox.io_sandbox;
 
-import org.breadsb.sandbox.io_sandbox.IOSandbox;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.*;
+import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 public class IOSandboxTestSuite {
 
@@ -72,6 +71,7 @@ public class IOSandboxTestSuite {
 
     @Test
     void readFromAFile() throws IOException {
+        boolean created = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt").createNewFile();
         File file = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder result = new StringBuilder();
@@ -110,20 +110,30 @@ public class IOSandboxTestSuite {
     }
 
     @Test
-    void renameToMethod() {
+    void renameToMethod() throws IOException {
+        boolean isCreated = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt").createNewFile();
+
         File file = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
         boolean isMoved = file.renameTo(new File("src/test/java/org/breadsb/sandbox/io_sandbox/IOFile.txt"));
         Assertions.assertTrue(isMoved);
-        File file2 = new File("src/test/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
-        boolean isMoved2 = file2.renameTo(new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt"));
-        Assertions.assertTrue(isMoved2);
+
+        File fileAtNewPosition = new File("src/test/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
+        boolean isMovedBack = fileAtNewPosition.renameTo(new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt"));
+        Assertions.assertTrue(isMovedBack);
+
+        boolean isDeleted = file.delete();
     }
 
     @Test
-    void renameFile() {
+    void renameFile() throws IOException {
+        boolean created = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt").createNewFile();
         File file = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
         boolean isRenamed = file.renameTo(new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile2.txt"));
         Assertions.assertTrue(isRenamed);
+
+        //CLEAN
+        boolean isDeleted = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile2.txt").delete();
+        Assertions.assertTrue(isDeleted);
     }
 
     @Test
@@ -138,5 +148,33 @@ public class IOSandboxTestSuite {
         IOSandbox ios = new IOSandbox();
         boolean result = ios.deleteFileJDK7();
         Assertions.assertTrue(result);
+    }
+
+    @Test
+    void test() {
+        Path path = new File("image.png").toPath();
+        String mimeType = null;
+        try {
+            mimeType = Files.probeContentType(path);
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        Assertions.assertEquals("image/png", mimeType);
+    }
+
+    @Test
+    void checkMimeTypeUsingURLConnection() throws IOException {
+        File file = new File("product.png");
+        URLConnection connection = file.toURI().toURL().openConnection();
+        String mimeType = connection.getContentType();
+
+        Assertions.assertEquals("image/png", mimeType);
+    }
+
+    @Test
+    void checkMimeTypeUsingGuess() {
+        File file = new File("image.png");
+        String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+        Assertions.assertEquals("image/png", mimeType);
     }
 }
