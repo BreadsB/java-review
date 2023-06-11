@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
@@ -45,5 +46,11 @@ public class IOSandboxTestSuite {
         String s = "";
         boolean fileCreated = ioSandbox.createNewTextFile(s);
         Assertions.assertFalse(fileCreated);
+    }
+
+    @Test
+    void consoleTesting() {
+        Console console = System.console();
+        console.readLine();
     }
 }

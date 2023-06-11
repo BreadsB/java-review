@@ -3,6 +3,7 @@ package org.breadsb.sandbox;
 import org.breadsb.sandbox.exceptions.BlankNameException;
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
@@ -37,6 +38,9 @@ public class IOSandbox {
     }
 
     public static void main(String[] args) {
+        Console console = System.console();
+        String input = console.readLine("Tell me your story: ");
+        char[] password = console.readPassword("Password: ");
     }
 
     void readUsingScanner() {
@@ -55,5 +59,11 @@ public class IOSandbox {
         } catch (NumberFormatException | IOException e) {
             System.out.println(e.getLocalizedMessage());
         }
+    }
+
+    void consoleClass() {
+        Console console = System.console();
+        String input = console.readLine("Tell me your story: \n");
+        char[] password = console.readPassword("Password: ");
     }
 }
