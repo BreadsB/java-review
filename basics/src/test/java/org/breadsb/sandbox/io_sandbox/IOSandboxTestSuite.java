@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
 import java.io.*;
+import java.net.URI;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -21,8 +22,19 @@ public class IOSandboxTestSuite {
     // How to virtually create a file? Use Mockito to only simulate a created file.
 
     @Test
+    void createAFileAndCheckIfExists() throws IOException {
+        URI uriPath = Path.of("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt").toUri();
+        File file = new File(uriPath);
+        file.createNewFile();
+        Assertions.assertTrue(file.exists());
+
+        // CLEAN
+        file.delete();
+    }
+
+    @Test
     @Disabled
-    void testCreateNewFile() throws IOException {
+    void testCreateNewFileUsingMockito() throws IOException {
         String s = "IOFile";
         ioSandbox.createNewTextFile(s);
         Mockito.when(mockIOSandbox.createNewTextFile(s)).thenReturn(true);
@@ -57,28 +69,35 @@ public class IOSandboxTestSuite {
         Assertions.assertFalse(fileCreated);
     }
 
-    private String readFromFile(InputStream inputstream) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(inputstream));
-            String line;
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
+    @Nested
+    class MIMETypeCheck {
+        @Test
+        void checkMimeType() {
+            Path path = new File("image.png").toPath();
+            String mimeType = null;
+            try {
+                mimeType = Files.probeContentType(path);
+            } catch (IOException e) {
+                System.out.println("Error: " + e.getMessage());
             }
-        } catch (IOException | NullPointerException e) {
-            System.out.println(e.getMessage());
+            Assertions.assertEquals("image/png", mimeType);
         }
-        return sb.toString();
-    }
 
-    @Test
-    void checkIfFileExists() throws IOException {
-        File file = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
-        file.createNewFile();
-        Assertions.assertTrue(file.exists());
+        @Test
+        void checkMimeTypeUsingGuess() {
+            File file = new File("image.png");
+            String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+            Assertions.assertEquals("image/png", mimeType);
+        }
 
-        // CLEAN
-        file.delete();
+        @Test
+        void checkMimeTypeUsingURLConnection() throws IOException {
+            File file = new File("product.png");
+            URLConnection connection = file.toURI().toURL().openConnection();
+            String mimeType = connection.getContentType();
+
+            Assertions.assertEquals("image/png", mimeType);
+        }
     }
 
     @Test
@@ -164,34 +183,6 @@ public class IOSandboxTestSuite {
         IOSandbox ios = new IOSandbox();
         boolean result = ios.deleteFileJDK7();
         Assertions.assertTrue(result);
-    }
-
-    @Test
-    void checkMimeType() {
-        Path path = new File("image.png").toPath();
-        String mimeType = null;
-        try {
-            mimeType = Files.probeContentType(path);
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        Assertions.assertEquals("image/png", mimeType);
-    }
-
-    @Test
-    void checkMimeTypeUsingURLConnection() throws IOException {
-        File file = new File("product.png");
-        URLConnection connection = file.toURI().toURL().openConnection();
-        String mimeType = connection.getContentType();
-
-        Assertions.assertEquals("image/png", mimeType);
-    }
-
-    @Test
-    void checkMimeTypeUsingGuess() {
-        File file = new File("image.png");
-        String mimeType = URLConnection.guessContentTypeFromName(file.getName());
-        Assertions.assertEquals("image/png", mimeType);
     }
 
     @Test
