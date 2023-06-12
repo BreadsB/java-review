@@ -8,10 +8,13 @@ import java.net.URI;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.channels.SeekableByteChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
 import java.util.Scanner;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
@@ -210,6 +213,20 @@ public class IOSandboxTestSuite {
                 String line = scanner.nextLine();
             }
             if (scanner.ioException() != null) throw scanner.ioException();
+        }
+    }
+
+    @Test
+    void readLargeFileUsing_SeekableByteChannel() {
+        try (SeekableByteChannel sbc = java.nio.file.Files.newByteChannel(Paths.get("createdFile.txt"), StandardOpenOption.READ)) {
+            ByteBuffer byteBuffer = ByteBuffer.allocate(100);
+            while (sbc.read(byteBuffer) > 0) {
+                byteBuffer.flip();
+                System.out.println(new String(byteBuffer.array()));
+                byteBuffer.clear();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
