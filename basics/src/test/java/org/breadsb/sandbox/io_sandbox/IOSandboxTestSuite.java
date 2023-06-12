@@ -7,6 +7,7 @@ import java.io.*;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -213,7 +214,7 @@ public class IOSandboxTestSuite {
 
     @Test
     void readLargeLifeEfficiently() throws IOException {
-        try (FileInputStream fileInputStream = new FileInputStream("createdFile.txt"); Scanner scanner = new Scanner(fileInputStream, "UTF-8")) {
+        try (FileInputStream fileInputStream = new FileInputStream("createdFile.txt"); Scanner scanner = new Scanner(fileInputStream, StandardCharsets.UTF_8)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
             }
