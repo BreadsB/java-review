@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class IOSandboxTestSuite {
@@ -228,5 +229,14 @@ public class IOSandboxTestSuite {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    void checkIfFileExistsUsing_SymbolicLink() throws IOException {
+//        Run with administrator privilege
+        Path file1 = Files.createTempFile("java", "test_");
+        Path file2 = Paths.get("link-test-" + ThreadLocalRandom.current().nextInt());
+        Path link = Files.createSymbolicLink(file2, file1);
+        Assertions.assertTrue(Files.exists(link));
     }
 }
