@@ -10,10 +10,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -233,10 +230,15 @@ public class IOSandboxTestSuite {
 
     @Test
     void checkIfFileExistsUsing_SymbolicLink() throws IOException {
-//        Run with administrator privilege
+//        Run this test with administrator privilege
         Path file1 = Files.createTempFile("java", "test_");
         Path file2 = Paths.get("link-test-" + ThreadLocalRandom.current().nextInt());
         Path link = Files.createSymbolicLink(file2, file1);
-        Assertions.assertTrue(Files.exists(link));
+        Files.deleteIfExists(file1);
+        Assertions.assertTrue(Files.exists(link, LinkOption.NOFOLLOW_LINKS));
+
+        //Clean
+        Files.deleteIfExists(file2);
     }
+
 }
