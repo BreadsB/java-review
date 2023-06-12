@@ -4,7 +4,9 @@ import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -234,11 +236,19 @@ public class IOSandboxTestSuite {
         Path file1 = Files.createTempFile("java", "test_");
         Path file2 = Paths.get("link-test-" + ThreadLocalRandom.current().nextInt());
         Path link = Files.createSymbolicLink(file2, file1);
-        Files.deleteIfExists(file1);
         Assertions.assertTrue(Files.exists(link, LinkOption.NOFOLLOW_LINKS));
 
         //Clean
         Files.deleteIfExists(file2);
+        Files.deleteIfExists(file1);
     }
 
+    @Test
+    void downloadWebpage() throws IOException {
+        URL url = new URL("http://www.google.com");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+        BufferedWriter writer = new BufferedWriter(new FileWriter("myPage.html"));
+        String line;
+        while ((line = reader.readLine()) != null) writer.write(line);
+    }
 }
