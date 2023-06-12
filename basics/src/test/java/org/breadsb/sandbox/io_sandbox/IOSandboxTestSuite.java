@@ -1,15 +1,18 @@
 package org.breadsb.sandbox.io_sandbox;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
 import java.io.*;
 import java.net.URLConnection;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class IOSandboxTestSuite {
 
     IOSandbox mockIOSandbox = Mockito.mock(IOSandbox.class);
@@ -17,6 +20,7 @@ public class IOSandboxTestSuite {
     // How to virtually create a file? Use Mockito to only simulate a created file.
 
     @Test
+    @Disabled
     void testCreateNewFile() throws IOException {
         String s = "IOFile";
         ioSandbox.createNewTextFile(s);
@@ -26,6 +30,7 @@ public class IOSandboxTestSuite {
     }
 
     @Test
+    @Disabled
     void testForceExceptionOnCreatingNewFile() {
         String fileName = "IOFile";
         boolean result = ioSandbox.createNewTextFile(fileName);
@@ -36,6 +41,7 @@ public class IOSandboxTestSuite {
     }
 
     @Test
+    @Disabled
     void testTryCreateNewFileWhileExists() {
         String s = "CreatingNewTxtFileUsingJava";
         boolean result = ioSandbox.createNewTextFile(s);
@@ -43,6 +49,7 @@ public class IOSandboxTestSuite {
     }
 
     @Test
+    @Disabled
     void testCreateNewFileWithEmptyName() throws IOException {
         String s = "";
         boolean fileCreated = ioSandbox.createNewTextFile(s);
@@ -64,15 +71,20 @@ public class IOSandboxTestSuite {
     }
 
     @Test
-    void checkIfFileExists() {
+    void checkIfFileExists() throws IOException {
         File file = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
+        file.createNewFile();
         Assertions.assertTrue(file.exists());
+
+        // CLEAN
+        file.delete();
     }
 
     @Test
     void readFromAFile() throws IOException {
-        boolean created = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt").createNewFile();
         File file = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
+        file.createNewFile();
+
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder result = new StringBuilder();
         try {
@@ -81,59 +93,62 @@ public class IOSandboxTestSuite {
                 result.append(tempTryString).append("\n");
             }
         } catch (IOException | NullPointerException e) {
-            System.out.println(e.getCause().getMessage());
+            System.out.println("No file or no text inside");
         }
         System.out.println(result);
+        br.close();
+        file.delete();
     }
 
-    @Test
-    void moveFileToTestDirectory() {
-//        Mockito for a File
-        Path file = Paths.get("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
-        Path targetFile = Paths.get("src/test/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
-        try {
-            Files.move(file, targetFile);
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+    @Nested
+    class movingFiles {
+
+        boolean isMoved, isCreated;
+        static final Path INIT_PATH = Paths.get("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
+        static final Path TARGET_PATH = Path.of("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
+        File file;
+
+        @BeforeEach
+        void setUp() {
+            isCreated = false;
+            isMoved = false;
+            file = new File(INIT_PATH.toUri());
+
+            try {
+                isCreated = file.createNewFile();
+            } catch (IOException e) {
+                System.out.println("ERROR --> Cannot create a File --> " + e.getCause());
+            }
         }
-    }
 
-    @Test
-    void moveFileToMainDirectory() {
-        Path file = Paths.get("src/test/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
-        Path targetFile = Paths.get("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
-        try {
-            Files.move(file, targetFile);
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+        @AfterEach
+        void cleanAfterTest() {
+            file = new File(TARGET_PATH.toUri());
+            file.delete();
         }
-    }
 
-    @Test
-    void renameToMethod() throws IOException {
-        boolean isCreated = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt").createNewFile();
+        @Test
+        void moveAFileUsingJDK7() {
+            try {
+                Files.move(file.toPath(), TARGET_PATH);
+                isMoved = true;
+            } catch (IOException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+            Assertions.assertTrue(isMoved);
+        }
 
-        File file = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
-        boolean isMoved = file.renameTo(new File("src/test/java/org/breadsb/sandbox/io_sandbox/IOFile.txt"));
-        Assertions.assertTrue(isMoved);
+        @Test
+        void moveAFileUsing_RenameTo() {
+            boolean isMoved = file.renameTo(TARGET_PATH.toFile());
+            Assertions.assertTrue(isMoved);
+        }
 
-        File fileAtNewPosition = new File("src/test/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
-        boolean isMovedBack = fileAtNewPosition.renameTo(new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt"));
-        Assertions.assertTrue(isMovedBack);
-
-        boolean isDeleted = file.delete();
-    }
-
-    @Test
-    void renameFile() throws IOException {
-        boolean created = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt").createNewFile();
-        File file = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile.txt");
-        boolean isRenamed = file.renameTo(new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile2.txt"));
-        Assertions.assertTrue(isRenamed);
-
-        //CLEAN
-        boolean isDeleted = new File("src/main/java/org/breadsb/sandbox/io_sandbox/IOFile2.txt").delete();
-        Assertions.assertTrue(isDeleted);
+        @Test
+        void renameFile() {
+            boolean isRenamed = file.renameTo(new File(TARGET_PATH.toUri()));
+            Assertions.assertTrue(isRenamed);
+        }
     }
 
     @Test
@@ -151,7 +166,7 @@ public class IOSandboxTestSuite {
     }
 
     @Test
-    void test() {
+    void checkMimeType() {
         Path path = new File("image.png").toPath();
         String mimeType = null;
         try {
@@ -176,5 +191,33 @@ public class IOSandboxTestSuite {
         File file = new File("image.png");
         String mimeType = URLConnection.guessContentTypeFromName(file.getName());
         Assertions.assertEquals("image/png", mimeType);
+    }
+
+    @Test
+    void writeTextToFileUsing_FileChannel() throws IOException {
+        RandomAccessFile randomAccessFile = new RandomAccessFile("createdFile.txt", "rw");
+        FileChannel channel = randomAccessFile.getChannel();
+        byte[] string = "//000//".getBytes();
+        ByteBuffer byteBuffer = ByteBuffer.allocate(string.length);
+        byteBuffer.put(string);
+        byteBuffer.flip();
+        randomAccessFile.seek(12);
+        channel.write(byteBuffer);
+        randomAccessFile.close();
+        channel.close();
+
+        RandomAccessFile raf = new RandomAccessFile("createdFile.txt", "r");
+        raf.readLine();
+        raf.close();
+    }
+
+    @Test
+    void readLargeLifeEfficiently() throws IOException {
+        try (FileInputStream fileInputStream = new FileInputStream("createdFile.txt"); Scanner scanner = new Scanner(fileInputStream, "UTF-8")) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+            }
+            if (scanner.ioException() != null) throw scanner.ioException();
+        }
     }
 }

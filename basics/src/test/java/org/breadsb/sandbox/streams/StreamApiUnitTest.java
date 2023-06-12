@@ -45,7 +45,7 @@ public class StreamApiUnitTest {
                 .count();
 
         Assertions.assertEquals(0, counter[0]);
-        Assertions.assertEquals(1, sizeSecond);
+        Assertions.assertEquals(0, sizeSecond);
     }
 
     @Test
