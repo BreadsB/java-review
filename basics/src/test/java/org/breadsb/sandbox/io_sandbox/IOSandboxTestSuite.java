@@ -118,7 +118,6 @@ public class IOSandboxTestSuite {
         } catch (IOException | NullPointerException e) {
             System.out.println("No file or no text inside");
         }
-        System.out.println(result);
         br.close();
         file.delete();
     }
@@ -222,7 +221,6 @@ public class IOSandboxTestSuite {
             ByteBuffer byteBuffer = ByteBuffer.allocate(100);
             while (sbc.read(byteBuffer) > 0) {
                 byteBuffer.flip();
-                System.out.println(new String(byteBuffer.array()));
                 byteBuffer.clear();
             }
         } catch (IOException e) {
@@ -230,9 +228,10 @@ public class IOSandboxTestSuite {
         }
     }
 
+    @Disabled
     @Test
     void checkIfFileExistsUsing_SymbolicLink() throws IOException {
-//        Run this test with administrator privilege
+//        Enable this test if you have administrator privileges
         Path file1 = Files.createTempFile("java", "test_");
         Path file2 = Paths.get("link-test-" + ThreadLocalRandom.current().nextInt());
         Path link = Files.createSymbolicLink(file2, file1);
