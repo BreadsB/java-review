@@ -7,14 +7,11 @@ public class Settings {
     private double saturation = 1;
     private double hue = 1;
 
-    private Settings() {}
+    private Settings() {
+    }
 
     public static Settings getInstance() {
         return instance;
-    }
-
-    public static void setInstance(Settings instance) {
-        Settings.instance = instance;
     }
 
     public double getBrightness() {
