@@ -1,4 +1,4 @@
-package org.breadsb.designpatterns;
+package org.breadsb.designpatterns.abstractfactory;
 
 import org.breadsb.designpatterns.abstractfactory.factories.AbstractFactory;
 import org.breadsb.designpatterns.abstractfactory.products.Product;

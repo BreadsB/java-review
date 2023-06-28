@@ -1,6 +1,5 @@
 package org.breadsb.designpatterns.abstractfactory;
 
-import org.breadsb.designpatterns.Order;
 import org.breadsb.designpatterns.abstractfactory.factories.AbstractFactory;
 import org.breadsb.designpatterns.abstractfactory.factories.ChairFactory;
 import org.breadsb.designpatterns.abstractfactory.factories.DoorFactory;
