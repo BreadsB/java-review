@@ -24,4 +24,11 @@ public class AddonsTest {
     void testSignum() {
         Addons.Numbers.signum();
     }
+
+    @Test
+    void test3() {
+        String s = "trzy.txt";
+        String ss = s.substring(s.lastIndexOf("."));
+        System.out.println(ss);
+    }
 }
