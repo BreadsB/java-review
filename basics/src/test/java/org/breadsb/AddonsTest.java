@@ -31,4 +31,9 @@ public class AddonsTest {
         String ss = s.substring(s.lastIndexOf("."));
         System.out.println(ss);
     }
+
+    @Test
+    void generateRandomNumbers() {
+        System.out.println(Addons.generateRandomLicenceNumbers(6, 5));
+    }
 }

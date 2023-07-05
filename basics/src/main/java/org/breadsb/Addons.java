@@ -1,6 +1,7 @@
 package org.breadsb;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Addons {
 
@@ -84,5 +85,26 @@ public class Addons {
             int signum3 = Long.signum(-500L);
             System.out.println("This is example of using signum: " + signum1 + ", " + signum2 + ", " + signum3);
         }
+    }
+
+    public static String generateRandomLicenceNumbers(int groups, int charactersPerGroup) {
+        StringBuilder result = new StringBuilder();
+
+        Random random = new Random();
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        for (int i = 0; i < groups; i++) {
+            for (int j = 0; j < charactersPerGroup; j++) {
+                int randomIndex = random.nextInt(characters.length());
+                char randomChar = characters.charAt(randomIndex);
+                result.append(randomChar);
+            }
+
+            if (i != groups - 1) {
+                result.append("-");
+            }
+        }
+
+        return result.toString();
     }
 }

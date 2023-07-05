@@ -5,5 +5,6 @@ public class Client {
         MP3Player adaptee = new MP3Player();
         AdvancedPlayer adapter = new AdvancedPlayer(adaptee);
         System.out.println(adapter.playVideo());
+        System.out.println(adapter.playMusic());
     }
 }
