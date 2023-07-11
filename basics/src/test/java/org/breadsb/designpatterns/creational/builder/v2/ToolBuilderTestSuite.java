@@ -1,6 +1,4 @@
 package org.breadsb.designpatterns.creational.builder.v2;
-
-import org.breadsb.designpatterns.creational.builder.builder.v2.Tool;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
