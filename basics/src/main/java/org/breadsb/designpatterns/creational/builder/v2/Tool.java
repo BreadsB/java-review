@@ -1,4 +1,4 @@
-package org.breadsb.designpatterns.creational.builder.builder.v2;
+package org.breadsb.designpatterns.creational.builder.v2;
 
 public class Tool {
 
