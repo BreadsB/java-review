@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserTestSuite {
+public class AddressTestSuite {
 
     @Nested
     class InnerTests {
