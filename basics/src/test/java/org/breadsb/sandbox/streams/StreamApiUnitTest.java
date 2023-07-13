@@ -1,12 +1,10 @@
 package org.breadsb.sandbox.streams;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 
 public class StreamApiUnitTest {
 
