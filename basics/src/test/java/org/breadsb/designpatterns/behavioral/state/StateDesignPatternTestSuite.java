@@ -1,5 +1,6 @@
 package org.breadsb.designpatterns.behavioral.state;
 
+import org.breadsb.designpatterns.behavioral.state.v1.Order;
 import org.junit.jupiter.api.Test;
 
 public class StateDesignPatternTestSuite {

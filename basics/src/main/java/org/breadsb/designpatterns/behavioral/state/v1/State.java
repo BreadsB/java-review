@@ -1,4 +1,4 @@
-package org.breadsb.designpatterns.behavioral.state;
+package org.breadsb.designpatterns.behavioral.state.v1;
 
 public interface State {
     void process(Order order);
