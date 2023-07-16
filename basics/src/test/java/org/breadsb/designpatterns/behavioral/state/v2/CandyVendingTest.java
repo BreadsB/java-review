@@ -6,7 +6,7 @@ public class CandyVendingTest {
 
     @Test
     void testOne() {
-        CandyVendingMachine cvm = new CandyVendingMachine();
+        CandyVendingMachine cvm = new CandyVendingMachine(1);
         cvm.insertCoin();
         cvm.pressButton();
     }
